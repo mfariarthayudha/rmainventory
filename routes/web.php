@@ -15,11 +15,14 @@ use App\Http\Controllers\Admin;
 |
 */
 
-Route::get('/', [Admin::class, 'index']);
+Route::middleware(['mustAuthenticated'])->group(function() {
+    Route::get('/', [Admin::class, 'index']);
+    Route::get('return', [Admin::class, 'return']);
+    Route::get('users', [Admin::class, 'users']);
+});
 
-Route::get('users', [Admin::class, 'users']);
 
-Route::prefix('authentication')->group(function() {
-    Route::view('login', 'authentication.login');
+Route::middleware(['mustNotAuthenticated'])->prefix('authentication')->group(function() {
+    Route::get('login', [Authentication::class, 'login']);
     Route::post('_login', [Authentication::class, '_login']);
 });

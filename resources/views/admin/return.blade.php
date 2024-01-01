@@ -1,7 +1,7 @@
 <html>
 	<!--begin::Head-->
 	<head>
-		<title>Dasbor | RMA Inventory</title>
+		<title>Pengembalian | RMA Inventory</title>
 		
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta charset="utf-8" />
@@ -84,7 +84,7 @@
                                 
                                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                     <a href="{{ url('/') }}">
-                                        <span class="menu-link active">
+                                        <span class="menu-link">
                                             <span class="menu-icon">
                                                 <!--begin::Svg Icon | path: icons/duotune/finance/fin002.svg-->
                                                 <span class="svg-icon svg-icon-2">
@@ -104,7 +104,7 @@
 
                                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                     <a href="{{ url('/return') }}">
-                                        <span class="menu-link">
+                                        <span class="menu-link active">
                                             <span class="menu-icon">
                                                 <!--begin::Svg Icon | path: icons/duotune/finance/fin002.svg-->
                                                 <span class="svg-icon svg-icon-2">
@@ -115,7 +115,7 @@
                                                 </span>
                                                 <!--end::Svg Icon-->
                                             </span>
-
+                                            
                                             <span class="menu-title">Pengembalian</span>
                                         </span>
                                     </a>
@@ -292,77 +292,26 @@
 						<div class="post d-flex flex-column-fluid" id="kt_post">
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
-                                <div class="card bg-light shadow-sm m-5">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Dashboard Laporan</h3>
-                                    </div>
-                                    <div class="card card-bordered">
-                                        <div class="card-body">
-                                            <div id="chart" style="height: 350px;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body card-scroll h-500px">
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                            <!--begin::Number-->
-                                            <div class="d-flex align-items-center">
-                                                <span class="svg-icon fs-3 text-success me-2">
-                                                    >>>
-                                                </span>
-                                                <div class="fs-2 fw-bold" data-kt-countup="false" data-kt-countup-prefix="@" id="box-user">0</div>
-                                            </div>
-                                            <!--end::Number-->
-
-                                            <!--begin::Label-->
-                                            <div class="fw-semibold fs-6 ">Jumlah User</div>
-                                            <!--end::Label-->
-                                        </div>
-                                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                            <!--begin::Number-->
-                                            <div class="d-flex align-items-center">
-                                                <span class="svg-icon fs-3 text-success me-2">
-                                                    >>>
-                                                </span>
-                                                <div class="fs-2 fw-bold" data-kt-countup="false" data-kt-countup-prefix="@" id="box-A">0</div>
-                                            </div>
-                                            <!--end::Number-->
-
-                                            <!--begin::Label-->
-                                            <div class="fw-semibold fs-6 ">Menunggu Persetujuan</div>
-                                            <!--end::Label-->
-                                        </div>
-                                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                            <!--begin::Number-->
-                                            <div class="d-flex align-items-center">
-                                                <span class="svg-icon fs-3 text-success me-2">
-                                                    >>>
-                                                </span>
-                                                <div class="fs-2 fw-bold" data-kt-countup="false" data-kt-countup-prefix="@" id="box-B">0</div>
-                                            </div>
-                                            <!--end::Number-->
-
-                                            <!--begin::Label-->
-                                            <div class="fw-semibold fs-6 ">Pengajuan Ditolak</div>
-                                            <!--end::Label-->
-                                        </div>
-                                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                            <!--begin::Number-->
-                                            <div class="d-flex align-items-center">
-                                                <span class="svg-icon fs-3 text-success me-2">
-                                                    >>>
-                                                </span>
-                                                <div class="fs-2 fw-bold" data-kt-countup="false" data-kt-countup-prefix="@" id="box-C">0</div>
-                                            </div>
-                                            <!--end::Number-->
-
-                                            <!--begin::Label-->
-                                            <div class="fw-semibold fs-6 ">Pengajuan Disetujui</div>
-                                            <!--end::Label-->
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        Footer
-                                    </div>
-                                </div>
+								<div class="float-end">
+									<span class="btn btn-success"><a href="#">export</a></span>
+								</div>
+								<table id="table-user" class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th class="text-center">No</th>
+											<th class="text-center">NO.IO/SP2K/SO</th>
+											<th class="text-center">SN</th>
+											<th class="text-center">Customer</th>
+											<th class="text-center">Status</th>
+											<th class="text-center">Tanggal Pengembalian</th>
+											<th class="text-center">Valuation Type</th>
+											<th class="text-center">Lokasi Asal</th>
+											<th class="text-center">Merk</th>
+											<th class="text-center">Type</th>
+											<th class="text-center notexport">Action</th>
+										</tr>
+									</thead>
+								</table>
 							</div>
 							<!--end::Container-->
 						</div>

@@ -103,7 +103,7 @@
                                 </div>
 
                                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                    <a href="{{ url('/list_logbarang') }}">
+                                    <a href="{{ url('/return') }}">
                                         <span class="menu-link">
                                             <span class="menu-icon">
                                                 <!--begin::Svg Icon | path: icons/duotune/finance/fin002.svg-->
@@ -115,7 +115,7 @@
                                                 </span>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <span class="menu-title">Data Barang</span>
+                                            <span class="menu-title">Pengembalian</span>
                                             
                                         </span>
                                     </a>

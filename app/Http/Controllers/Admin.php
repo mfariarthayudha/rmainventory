@@ -10,6 +10,10 @@ class Admin extends Controller {
         return view('admin.dashboard');
     }
 
+    public function return(Request $request) {
+        return view('admin.return');
+    }
+
     public function users(Request $request) {
         return view('admin.user');
     }

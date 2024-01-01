@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class Authentication extends Controller {
+    public function login(Request $request) {
+        return view('authentication.login');
+    }
 
     public function _login(Request $request) {
         $credentials = $request->validate([
