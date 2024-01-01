@@ -183,7 +183,7 @@
 										<!--begin::Menu-->
 										<div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
                                             <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
-                                                Dasbor
+                                                Pengembalian
                                                 <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                                             </h1>
 										</div>
@@ -224,9 +224,8 @@
 
 														<!--begin::Username-->
 														<div class="d-flex flex-column">
-															<div class="fw-bolder d-flex align-items-center fs-5">Max Smith
-															<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-															<a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+															<div class="fw-bolder d-flex align-items-center fs-5">{{ $user->username }}</div>
+															<a href="javascript:void(0)" class="fw-bold text-muted text-hover-primary fs-7">{{ $user->role }}</a>
 														</div>
 														<!--end::Username-->
 													</div>
@@ -238,23 +237,7 @@
 												
 												<!--begin::Menu item-->
 												<div class="menu-item px-5">
-													<a href="{{url('logout')}}" class="menu-link px-5">Sign Out</a>
-												</div>
-												<!--end::Menu item-->
-
-												<!--begin::Menu separator-->
-												<div class="separator my-2"></div>
-												<!--end::Menu separator-->
-
-												<!--begin::Menu item-->
-												<div class="menu-item px-5">
-													<div class="menu-content px-5">
-														<label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="kt_user_menu_dark_mode_toggle">
-															<input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode" id="kt_user_menu_dark_mode_toggle" data-kt-url="../../demo1/dist/index.html" />
-															<span class="pulse-ring ms-n1"></span>
-															<span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
-														</label>
-													</div>
+													<a href="{{ url('/authentication/_logout') }}" class="menu-link px-5">Keluar</a>
 												</div>
 												<!--end::Menu item-->
 											</div>

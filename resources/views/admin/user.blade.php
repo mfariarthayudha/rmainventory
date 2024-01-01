@@ -224,9 +224,8 @@
 
 														<!--begin::Username-->
 														<div class="d-flex flex-column">
-															<div class="fw-bolder d-flex align-items-center fs-5">Max Smith
-															<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-															<a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+															<div class="fw-bolder d-flex align-items-center fs-5">{{ $user->username }}</div>
+															<a href="javascript:void(0)" class="fw-bold text-muted text-hover-primary fs-7">{{ $user->role }}</a>
 														</div>
 														<!--end::Username-->
 													</div>
@@ -238,23 +237,7 @@
 												
 												<!--begin::Menu item-->
 												<div class="menu-item px-5">
-													<a href="{{url('logout')}}" class="menu-link px-5">Sign Out</a>
-												</div>
-												<!--end::Menu item-->
-
-												<!--begin::Menu separator-->
-												<div class="separator my-2"></div>
-												<!--end::Menu separator-->
-
-												<!--begin::Menu item-->
-												<div class="menu-item px-5">
-													<div class="menu-content px-5">
-														<label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="kt_user_menu_dark_mode_toggle">
-															<input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode" id="kt_user_menu_dark_mode_toggle" data-kt-url="../../demo1/dist/index.html" />
-															<span class="pulse-ring ms-n1"></span>
-															<span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
-														</label>
-													</div>
+													<a href="{{ url('/authentication/_logout') }}" class="menu-link px-5">Keluar</a>
 												</div>
 												<!--end::Menu item-->
 											</div>
@@ -305,6 +288,29 @@
                                         </tr>
                                     </thead>
                                 </table>
+
+                                <div class="row g-9 mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                        <span>Lokasi Asal</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Lokasi Asal"></i>
+                                    </label>
+                                    <!--end::Label-->
+                                    <input type="text" class="form-control form-control-solid" placeholder="Lokasi Asal" name="lokasi_asal" id="lokasi_asal"/>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                        <span>Customer Name(CPE)</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Customer Name(CPE)"></i>
+                                    </label>
+                                    <!--end::Label-->
+                                    <input type="text" class="form-control form-control-solid" placeholder="Customer Name" name="customer_name" id="customer_name"/>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
 							</div>
 							<!--end::Container-->
 						</div>
@@ -345,195 +351,6 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#table-user').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{url('api_user')}}',
-                columns: [
-                    {
-                    render: function (data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
-                    },
-                    className: 'dt-body-center',
-                    },
-                    {
-                    data: 'username',
-                    className: 'dt-body-center',
-                    },
-                    {
-                    data: 'email',
-                    className: 'dt-body-center'
-                    },
-                    {
-                    data: 'role',
-                    className: 'dt-body-center'
-                    },
-                    {
-                    data: 'no_hp',
-                    className: 'dt-body-center'
-                    },
-                    {
-                    "render": function ( data, type, row ) {
-                        console.log(row.is_active)
-                        if(row.is_active==1)return 'aktif'
-                        else return 'tidak aktif'
-                    },
-                    className: 'dt-body-center',
-                    },
-                    {
-                    "render": function ( data, type, row ) {
-                        return `
-                        <button class="btn btn-info btn-sm btn-reset" data-id="${row.id}">Reset</button>
-                        <button class="btn btn-dark btn-sm btn-aktivasi" data-id="${row.id}">
-                        ${
-                        (row.is_active==1) ? 'Disable' : 'Aktivasi'
-                        }
-                        </button>
-                        `
-                    },
-                    className: 'dt-body-center',
-                    }
-                ],
-                });
-                $('body').on('click', '.btn-reset', function() {
-                    dataId = $(this).attr('data-id');
-                    console.log(dataId)
-                    Swal.fire({ 
-                        title: "Konfirmasi",
-                        text: "Apakah yakin mereset password akun ini ?",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonText: `Reset Password`,
-                    }).then(function(result) {
-                        if (result.value) {
-                            $.ajax({
-                                type: "GET", 
-                                dataType: 'json',
-                                url: `{{ url('/reset_password/${dataId}') }}`,
-                                beforeSend: function() {
-                                    Swal.fire({
-                                        title: 'Harap Tunggu',
-                                        text: "Upload dokumen sedang diproses",
-                                        icon: 'info',
-                                        timer: 4000,
-                                        didOpen: () => {
-                                            Swal.showLoading()
-                                            timerInterval = setInterval(() => {
-                                                const content = Swal
-                                                    .getContent()
-                                                if (content) {
-                                                    const b = content
-                                                        .querySelector(
-                                                            'b')
-                                                    if (b) {
-                                                        b.textContent =
-                                                            Swal
-                                                            .getTimerLeft()
-                                                    }
-                                                }
-                                            }, 300)
-                                        },
-                                        willClose: () => {
-                                            clearInterval(timerInterval)
-                                        },
-                                    });
-                                },
-                                success: function(result) {
-                                    Swal.fire({
-                                        title: "Sukses!",
-                                        text: "Password berhasil direset !",
-                                        icon: "success",
-                                        confirmButtonText: `OK`,
-                                    }).then((ok) => {
-                                        if (ok.value) {
-                                            console.log("sukses")
-                                        }
-                                    });
-                                },
-                                error: function(xhr, ajaxOptions, thrownError) {
-                                    Swal.fire("Error!", xhr + " " + ajaxOptions + " " +
-                                        thrownError,
-                                        "error");
-                                }
-                            });
-                        } else {
-                            return false;
-                        }
-                    });        
-                });
-                $('body').on('click', '.btn-aktivasi', function() {
-                    dataId = $(this).attr('data-id');
-                    console.log(dataId)
-                    Swal.fire({ 
-                        title: "Konfirmasi",
-                        text: "Apakah yakin mengubah status akun ini ?",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonText: `Ubah`,
-                    }).then(function(result) {
-                        if (result.value) {
-                            $.ajax({
-                                type: "GET", 
-                                dataType: 'json',
-                                url: `{{ url('/aktivasi/${dataId}') }}`,
-                                beforeSend: function() {
-                                    Swal.fire({
-                                        title: 'Harap Tunggu',
-                                        text: "Upload dokumen sedang diproses",
-                                        icon: 'info',
-                                        timer: 4000,
-                                        didOpen: () => {
-                                            Swal.showLoading()
-                                            timerInterval = setInterval(() => {
-                                                const content = Swal
-                                                    .getContent()
-                                                if (content) {
-                                                    const b = content
-                                                        .querySelector(
-                                                            'b')
-                                                    if (b) {
-                                                        b.textContent =
-                                                            Swal
-                                                            .getTimerLeft()
-                                                    }
-                                                }
-                                            }, 300)
-                                        },
-                                        willClose: () => {
-                                            clearInterval(timerInterval)
-                                        },
-                                    });
-                                },
-                                success: function(result) {
-                                    Swal.fire({
-                                        title: "Sukses!",
-                                        text: "Status aktivasi berhasil diubah !",
-                                        icon: "success",
-                                        confirmButtonText: `OK`,
-                                        allowOutsideClick: false,
-                                    }).then((ok) => {
-                                        if (ok.value) {
-                                            location.reload()
-                                        }
-                                    });
-                                },
-                                error: function(xhr, ajaxOptions, thrownError) {
-                                    Swal.fire("Error!", xhr + " " + ajaxOptions + " " +
-                                        thrownError,
-                                        "error");
-                                }
-                            });
-                        } else {
-                            return false;
-                        }
-                    });        
-                });
-            
-            });
-        </script>
 	</body>
 	<!--end::Body-->
 </html>
