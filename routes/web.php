@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication;
-use App\Http\Controllers\Admin;
+use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Users;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,12 @@ use App\Http\Controllers\Admin;
 */
 
 Route::middleware(['mustAuthenticated'])->group(function() {
-    Route::get('/', [Admin::class, 'index']);
-    Route::get('return', [Admin::class, 'return']);
-    Route::get('users', [Admin::class, 'users']);
+    Route::post('/users/_add-user', [Users::class, '_addUser']);
+    Route::get('/users/_delete-user', [Users::class, '_deleteUser']);
+    Route::get('/users', [Users::class, 'index']);
+
+    Route::get('return', [Dashboard::class, 'return']);
+    Route::get('/', [Dashboard::class, 'index']);
 });
 
 

@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <title>Affiliate Dashboard - SB Admin Pro</title>
+        <title>Dasbor | RMA Inventory</title>
 
         <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
         <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
