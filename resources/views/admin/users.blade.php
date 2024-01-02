@@ -111,7 +111,7 @@
                             </a>
 
                             <!-- Sidenav Link -->
-                            <a class="nav-link" href="{{ url('/return') }}">
+                            <a class="nav-link" href="{{ url('/return-requests') }}">
                                 <div class="nav-link-icon"><i data-feather="corner-down-left"></i></div>
                                 Pengembalian
                             </a>

@@ -21,16 +21,4 @@ class Dashboard extends Controller {
             ]);
         }
     }
-
-    public function return(Request $request) {
-        return view('admin.return', [
-            'user' => $request->user()
-        ]);
-    }
-
-    public function users(Request $request) {
-        return view('admin.user', [
-            'user' => $request->user()
-        ]);
-    }
 }

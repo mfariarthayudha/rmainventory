@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <title>Dasbor | RMA Inventory</title>
+        <title>Pengguna | RMA Inventory</title>
 
         <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
         <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
@@ -105,13 +105,13 @@
                             <div class="sidenav-menu-heading">Menu</div>
 
                             <!-- Sidenav Link -->
-                            <a class="nav-link active" href="{{ url('/') }}">
+                            <a class="nav-link" href="{{ url('/') }}">
                                 <div class="nav-link-icon"><i data-feather="activity"></i></div>
                                 Dasbor
                             </a>
 
                             <!-- Sidenav Link -->
-                            <a class="nav-link" href="{{ url('/return-requests') }}">
+                            <a class="nav-link active" href="{{ url('/return-requests') }}">
                                 <div class="nav-link-icon"><i data-feather="corner-down-left"></i></div>
                                 Pengembalian
                             </a>
@@ -139,100 +139,64 @@
                         <!-- Custom page header alternative example-->
                         <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
                             <div class="me-4 mb-3 mb-sm-0">
-                                <h1 class="mb-0">Dasbor</h1>
+                                <h1 class="mb-0">Pengguna</h1>
                                 <div class="small">
                                     <span class="fw-500 text-primary">{{ date('l') }}</span>
                                     &middot; {{ date('F d, Y') }}
                                 </div>
                             </div>
+
                             <!-- Date range picker example-->
                             <div class="input-group input-group-joined border-0 shadow" style="width: 16.5rem">
                                 <span class="input-group-text"><i data-feather="calendar"></i></span>
                                 <input class="form-control ps-0 pointer" id="litepickerRangePlugin" placeholder="Select date range..." />
                             </div>
                         </div>
-                        <!-- Illustration dashboard card example-->
-                        <div class="card card-waves mb-4 mt-5">
-                            <div class="card-body p-5">
-                                <div class="row align-items-center justify-content-between">
-                                    <div class="col">
-                                        <h2 class="text-primary">Selamat datang {{ $user->username }}, Dasbor anda sudah siap!</h2>
-                                        <p class="text-gray-700">Great job, your affiliate dashboard is ready to go! You can view sales, generate links, prepare coupons, and download affiliate reports using this dashboard.</p>
-                                    </div>
 
-                                    <div class="col d-none d-lg-block mt-xxl-n4"><img class="img-fluid px-xl-4 mt-xxl-n5" src="/sb-admin-pro/assets/img/illustrations/statistics.svg" /></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <!-- Dashboard info widget 1-->
-                                <div class="card border-start-lg border-start-primary h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-grow-1">
-                                                <div class="small fw-bold text-primary mb-1">Pengembalian</div>
-                                                <div class="h5">{{ $totalReturnRequest }}</div>
-                                            </div>
-                                            <div class="ms-2"><i class="fa-solid fa-rotate-left fa-2x text-gray-200"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <!-- Dashboard info widget 2-->
-                                <div class="card border-start-lg border-start-warning h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-grow-1">
-                                                <div class="small fw-bold text-warning mb-1">Menunggu</div>
-                                                <div class="h5">{{ $pendingReturnRequest }}</div>
-                                            </div>
-                                            <div class="ms-2"><i class="fa-solid fa-hourglass-half fa-2x text-gray-200"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <!-- Dashboard info widget 3-->
-                                <div class="card border-start-lg border-start-success h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-grow-1">
-                                                <div class="small fw-bold text-success mb-1">Disetujui</div>
-                                                <div class="h5">{{ $approvedReturnRequest }}</div>
-                                            </div>
-                                            <div class="ms-2"><i class="fa-solid fa-check fa-2x text-gray-200"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <!-- Dashboard info widget 4-->
-                                <div class="card border-start-lg border-start-danger h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-grow-1">
-                                                <div class="small fw-bold text-danger mb-1">Ditolak</div>
-                                                <div class="h5">{{ $rejectedReturnRequest }}</div>
-                                            </div>
-                                            <div class="ms-2"><i class="fa-solid fa-xmark fa-2x text-gray-200"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+						<div class="card">
+							<div class="card-header">Daftar Pengembalian</div>
+
+							<div class="card-body">
+                                {!! session('deleteUserMessage') !!}
+
+								<table id="datatablesSimple">
+                                    <thead>
+										<tr>
+											<th>No</th>
+                                            <th>No.IO/SP2k/SO/PO/ANDOP</th>
+                                            <th>SN</th>
+											<th>Customer</th>
+											<th>Status</th>
+											<th>Tanggal Pengembalian</th>
+											<th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+											<th>No</th>
+                                            <th>No.IO/SP2k/SO/PO/ANDOP</th>
+                                            <th>SN</th>
+											<th>Customer</th>
+											<th>Status</th>
+											<th>Tanggal Pengembalian</th>
+											<th>Aksi</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        
+                                    </tbody>
+                                </table>
+							</div>
+						</div>
                     </div>
                 </main>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/sb-admin-pro/js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="/sb-admin-pro/assets/demo/chart-area-demo.js"></script>
-        <script src="/sb-admin-pro/assets/demo/chart-bar-demo.js"></script>
-        <script src="/sb-admin-pro/assets/demo/chart-pie-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
         <script src="/sb-admin-pro/js/litepicker.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="/sb-admin-pro/js/datatables/datatables-simple-demo.js"></script>
     </body>
 </html>
