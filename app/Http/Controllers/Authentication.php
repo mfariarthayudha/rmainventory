@@ -33,4 +33,10 @@ class Authentication extends Controller {
 
         return redirect('/');
     }
+
+    public function _logout(Request $request) {
+        $request->session()->flush();
+
+        return redirect(url('/authentication/login'));
+    }
 }

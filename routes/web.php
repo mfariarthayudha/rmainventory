@@ -33,6 +33,8 @@ Route::middleware(['mustAuthenticated'])->group(function() {
 
 
 Route::middleware(['mustNotAuthenticated'])->prefix('/authentication')->group(function() {
-    Route::get('/login', [Authentication::class, 'login']);
     Route::post('/_login', [Authentication::class, '_login']);
+    Route::get('/_logout', [Authentication::class, '_logout'])->withoutMiddleware(['mustNotAuthenticated']);
+
+    Route::get('/login', [Authentication::class, 'login']);
 });

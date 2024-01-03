@@ -19,6 +19,21 @@ class Dashboard extends Controller {
                 'rejectedReturnRequest' => ReturnRequest::where('request_status', 'rejected')
                     ->count()
             ]);
+        } elseif ($request->user()->role == 'user') {
+            return view('user.dashboard', [
+                'user' => $request->user(),
+                'totalReturnRequest' => ReturnRequest::where('created_by', $request->user()->user_id)
+                    ->count(),
+                'pendingReturnRequest' => ReturnRequest::where('request_status', 'pending')
+                    ->where('created_by', $request->user()->user_id)
+                    ->count(),
+                'approvedReturnRequest' => ReturnRequest::where('request_status', 'approved')
+                    ->where('created_by', $request->user()->user_id)
+                    ->count(),
+                'rejectedReturnRequest' => ReturnRequest::where('request_status', 'rejected')
+                    ->where('created_by', $request->user()->user_id)
+                    ->count()
+            ]);
         }
     }
 }

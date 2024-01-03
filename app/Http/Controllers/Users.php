@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class Users extends Controller{
     public function index(Request $request) {
@@ -23,7 +24,7 @@ class Users extends Controller{
     public function _addUser(Request $request) {
         if ($request->user()->role == 'admin') {
             $userData = $request->validate([
-                'username' => ['required', 'string', 'max:32', 'unique:users,username'],
+                'username' => ['required', 'string', 'max:32', Rule::unique('users')->where(fn ($query) => $query->where('username', $request->input('username'))->where('deleted_at', null))],
                 'password' => ['required', 'string'],
                 'passwordConfirmation' => ['required', 'string', 'same:password']
             ],
