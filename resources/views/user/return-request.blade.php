@@ -107,10 +107,10 @@
 							<div class="card-header">Tambah Pengembalian</div>
 
 							<div class="card-body">
-                                <form method="post" action="/users/_add-user">
-                                    @csrf
+                                {!! session('addReturnRequestMessage') !!}
 
-                                    
+                                <form method="post" action="/return-requests/_create" enctype="multipart/form-data">
+                                    @csrf
 
 									<div class="row mb-3">
                                         <div class="col-12 col-lg-6">
@@ -124,13 +124,13 @@
 										<div class="col-12 col-lg-6">
                                             <div class="mb-3">
                                                 <label for="valuation-type-input">Valuation Type</label>
-                                                <select class="form-control" id="valuation-type-input" name="valuationType" value="{{ old('valuationType') }}">
+                                                <select class="form-control" id="valuation-type-input" name="valuation_type" value="{{ old('valuation_type') }}">
                                                     <option>ex-Project</option>
                                                     <option>Dismantle</option>
                                                     <option>Rusak-L</option>
                                                     <option>Rusak-TL</option>
                                                 </select>
-                                                <small class="text-danger">{{ $errors->first('valuationType') }}</small>
+                                                <small class="text-danger">{{ $errors->first('valuation_type') }}</small>
                                             </div>
 										</div>
 
@@ -145,8 +145,8 @@
                                         <div class="col-12 col-lg-6">
 											<div class="mb-3">
 												<label for="customer-name-input">Customer Name</label>
-												<input class="form-control" id="customer-name-input" type="text" name="customerName" value="{{ old('customerName') }}" placeholder="Masukkan Customer Name">
-                                                <small class="text-danger">{{ $errors->first('customerName') }}</small>
+												<input class="form-control" id="customer-name-input" type="text" name="customer_name" value="{{ old('customer_name') }}" placeholder="Masukkan Customer Name">
+                                                <small class="text-danger">{{ $errors->first('customer_name') }}</small>
                                             </div>
 										</div>
 
@@ -169,16 +169,16 @@
                                         <div class="col-12 col-lg-6">
 											<div class="mb-3">
 												<label for="serial-number-input">Serial Number (SN) / Batch</label>
-												<input class="form-control" id="serial-number-input" type="text" name="serialNumber" value="{{ old('serialNumber') }}" placeholder="Masukkan Serial Number">
-                                                <small class="text-danger">{{ $errors->first('serialNumber') }}</small>
+												<input class="form-control" id="serial-number-input" type="text" name="serial_number" value="{{ old('serial_number') }}" placeholder="Masukkan Serial Number">
+                                                <small class="text-danger">{{ $errors->first('serial_number') }}</small>
                                             </div>
 										</div>
 
                                         <div class="col-12 col-lg-6">
 											<div class="mb-3">
 												<label for="material-picture-input">Foto Material</label>
-												<input class="form-control" id="material-picture-input" type="file" name="materialPicture" value="{{ old('materialPicture') }}">
-                                                <small class="text-danger">{{ $errors->first('materialPicture') }}</small>
+												<input class="form-control" id="material-picture-input" type="file" name="material_picture">
+                                                <small class="text-danger">{{ $errors->first('material_picture') }}</small>
                                             </div>
 										</div>
 									</div>

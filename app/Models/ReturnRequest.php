@@ -16,6 +16,7 @@ class ReturnRequest extends Model {
     protected $keyType = 'string';
 
     protected $fillable = [
+        'created_by',
         'identifier',
         'valuation_type',
         'origin',
@@ -23,6 +24,7 @@ class ReturnRequest extends Model {
         'type',
         'brand',
         'serial_number',
+        'material_picture',
         'request_status'
     ];
 
