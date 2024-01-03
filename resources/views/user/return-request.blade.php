@@ -110,13 +110,17 @@
                                 <form method="post" action="/users/_add-user">
                                     @csrf
 
-                                    <div class="mb-3">
-                                        <label for="identifier-input">No.IO/SP2K/SO/PO/ANDOP</label>
-                                        <input class="form-control" id="identifier-input" type="text" name="identifier" value="{{ old('identifier') }}" placeholder="Masukkan No.IO/SP2K/SO/PO/ANDOP">
-                                        <small class="text-danger">{{ $errors->first('identifier') }}</small>
-                                    </div>
+                                    
 
 									<div class="row mb-3">
+                                        <div class="col-12 col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="identifier-input">No.IO/SP2K/SO/PO/ANDOP</label>
+                                                <input class="form-control" id="identifier-input" type="text" name="identifier" value="{{ old('identifier') }}" placeholder="Masukkan No.IO/SP2K/SO/PO/ANDOP">
+                                                <small class="text-danger">{{ $errors->first('identifier') }}</small>
+                                            </div>
+                                        </div>
+
 										<div class="col-12 col-lg-6">
                                             <div class="mb-3">
                                                 <label for="valuation-type-input">Valuation Type</label>
@@ -167,6 +171,14 @@
 												<label for="serial-number-input">Serial Number (SN) / Batch</label>
 												<input class="form-control" id="serial-number-input" type="text" name="serialNumber" value="{{ old('serialNumber') }}" placeholder="Masukkan Serial Number">
                                                 <small class="text-danger">{{ $errors->first('serialNumber') }}</small>
+                                            </div>
+										</div>
+
+                                        <div class="col-12 col-lg-6">
+											<div class="mb-3">
+												<label for="material-picture-input">Foto Material</label>
+												<input class="form-control" id="material-picture-input" type="file" name="materialPicture" value="{{ old('materialPicture') }}">
+                                                <small class="text-danger">{{ $errors->first('materialPicture') }}</small>
                                             </div>
 										</div>
 									</div>
@@ -330,6 +342,13 @@
                                                     <small class="text-danger">{{ $errors->first('serialNumber') }}</small>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <label for="misscellaneous-input">Misscellaneous</label>
+                                            <textarea class="form-control" id="misscellaneous-input" rows="3">{{ $errors->first('misscellaneous') }}</textarea>
                                         </div>
                                     </div>
 
