@@ -20,6 +20,8 @@ use App\Http\Controllers\Users;
 Route::middleware(['mustAuthenticated'])->group(function() {
     Route::prefix('/return-requests')->group(function() {
         Route::post('/_create', [ReturnRequests::class, '_create']);
+        Route::get('/_approve', [ReturnRequests::class, '_approve']);
+        Route::get('/_reject', [ReturnRequests::class, '_reject']);
 
         Route::get('/create', [ReturnRequests::class, 'create']);
         Route::get('/detail', [ReturnRequests::class, 'detail']);

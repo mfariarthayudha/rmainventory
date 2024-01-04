@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\ReturnRequest;
 
 class ReturnRequests extends Controller {
@@ -60,6 +61,12 @@ class ReturnRequests extends Controller {
                 'returnRequest' => ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
                     ->first()
             ]);
+        } elseif ($request->user()->role == 'admin') {
+            return view('admin.return-request-detail', [
+                'user' => $request->user(),
+                'returnRequest' => ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
+                    ->first()
+            ]);
         }
     }
 
@@ -110,5 +117,72 @@ class ReturnRequests extends Controller {
 
             return back();
         }
+    }
+
+    public function _approve(Request $request) {
+        $validator = Validator::make($request->query(),
+        [
+            'returnRequestId' => ['required', 'string', 'exists:return_requests,return_request_id']
+        ],
+        [
+            'returnRequestId.exist' => 'Pengembalian tidak ditemukan'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/return-requests')->withErrors($validator);
+        }
+
+        $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
+            ->first();
+
+        $returnRequest->request_status = 'approved';
+        $returnRequest->save();
+
+        $request->session()->flash('returnRequestMessage', '
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Berhasil menerima pengembalian
+                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+
+        return redirect('/return-requests');
+    }
+
+    public function _reject(Request $request) {
+        $validator = Validator::make($request->query(),
+        [
+            'returnRequestId' => ['required', 'string', 'exists:return_requests,return_request_id']
+        ],
+        [
+            'returnRequestId.exist' => 'Pengembalian tidak ditemukan'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/return-requests')->withErrors($validator);
+        }
+
+        $request->validate([
+            'rejection_reason' => ['required', 'string', 'max:2048']
+        ],
+        [
+            'rejection_reason.required' => 'Alasan Penolakan tidak boleh kosong',
+            'rejection_reason.max' => 'Alasan Penolakan maksimal 2048 karakter'
+        ]);
+
+        $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
+            ->first();
+
+        $returnRequest->request_status = 'rejected';
+        $returnRequest->rejection_reason = $request->query('rejection_reason');
+        $returnRequest->save();
+
+        $request->session()->flash('returnRequestMessage', '
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Berhasil menolak pengembalian
+                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        ');
+
+        return redirect('/return-requests');
     }
 }
