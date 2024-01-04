@@ -22,6 +22,7 @@ Route::middleware(['mustAuthenticated'])->group(function() {
         Route::post('/_create', [ReturnRequests::class, '_create']);
 
         Route::get('/create', [ReturnRequests::class, 'create']);
+        Route::get('/detail', [ReturnRequests::class, 'detail']);
         Route::get('/', [ReturnRequests::class, 'index']);
     });
 

@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <title>Pengguna | RMA Inventory</title>
+        <title>Pengembalian | RMA Inventory</title>
 
         <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
         <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
@@ -29,50 +29,6 @@
             
             <!-- Navbar Items-->
             <ul class="navbar-nav align-items-center ms-auto">
-                <!-- Alerts Dropdown-->
-                <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
-                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
-                        <h6 class="dropdown-header dropdown-notifications-header">
-                            <i class="me-2" data-feather="bell"></i>
-                            Alerts Center
-                        </h6>
-                        <!-- Example Alert 1-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-warning"><i data-feather="activity"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 29, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">This is an alert message. It's nothing serious, but it requires your attention.</div>
-                            </div>
-                        </a>
-                        <!-- Example Alert 2-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-info"><i data-feather="bar-chart"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 22, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">A new monthly report is ready. Click here to view!</div>
-                            </div>
-                        </a>
-                        <!-- Example Alert 3-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-danger"><i class="fas fa-exclamation-triangle"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 8, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">Critical system failure, systems shutting down.</div>
-                            </div>
-                        </a>
-                        <!-- Example Alert 4-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-success"><i data-feather="user-plus"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 2, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">New user request. Woody has requested access to the organization.</div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item dropdown-notifications-footer" href="#!">View All Alerts</a>
-                    </div>
-                </li>
-                
                 <!-- User Dropdown-->
                 <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
                     <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -115,12 +71,6 @@
                                 <div class="nav-link-icon"><i data-feather="corner-down-left"></i></div>
                                 Pengembalian
                             </a>
-
-							<!-- Sidenav Link -->
-                            <a class="nav-link" href="{{ url('/users') }}">
-                                <div class="nav-link-icon"><i data-feather="users"></i></div>
-                                Pengguna
-                            </a>
                         </div>
                     </div>
                     <!-- Sidenav Footer-->
@@ -139,7 +89,7 @@
                         <!-- Custom page header alternative example-->
                         <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
                             <div class="me-4 mb-3 mb-sm-0">
-                                <h1 class="mb-0">Pengguna</h1>
+                                <h1 class="mb-0">Pengembalian</h1>
                                 <div class="small">
                                     <span class="fw-500 text-primary">{{ date('l') }}</span>
                                     &middot; {{ date('F d, Y') }}
@@ -159,6 +109,24 @@
 							<div class="card-body">
                                 {!! session('deleteUserMessage') !!}
 
+                                <div class="row mb-3">
+                                    <div class="col-12 col-lg-3">
+                                        <form method="get" action="/return-requests">
+                                            <div class="mb-3">
+                                                <select class="form-control" name="status">
+                                                    <option @if ($status == 'all') selected @endif>all</option>
+                                                    <option @if ($status == 'pending') selected @endif>pending</option>
+                                                    <option @if ($status == 'approved') selected @endif>approved</option>
+                                                    <option @if ($status == 'rejected') selected @endif>rejected</option>
+                                                </select>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+
 								<table id="datatablesSimple">
                                     <thead>
 										<tr>
@@ -168,7 +136,7 @@
 											<th>Customer</th>
 											<th>Status</th>
 											<th>Tanggal Pengembalian</th>
-											<th>Aksi</th>
+                                            <th>action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -179,11 +147,24 @@
 											<th>Customer</th>
 											<th>Status</th>
 											<th>Tanggal Pengembalian</th>
-											<th>Aksi</th>
+                                            <th>action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        
+                                        @foreach ($returnRequests as $index => $returnRequest)
+                                        <tr>
+                                            <th>{{ $index + 1 }}</th>
+                                            <th>{{ $returnRequest->identifier }}</th>
+                                            <th>{{ $returnRequest->serial_number }}</th>
+                                            <th>{{ $returnRequest->customer_name }}</th>
+                                            <th>{{ $returnRequest->request_status }}</th>
+                                            <th>{{ $returnRequest->created_at }}</th>
+                                            <th>
+                                                <a href="/return-requests/detail?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-primary">Detail</a>
+                                                <a href="#" class="btn btn-warning">Export PDf</a>
+                                            </th>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
 							</div>

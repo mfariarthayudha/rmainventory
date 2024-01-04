@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <title>Pengguna | RMA Inventory</title>
+        <title>Pengembalian | RMA Inventory</title>
 
         <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
         <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
@@ -109,6 +109,24 @@
 							<div class="card-body">
                                 {!! session('deleteUserMessage') !!}
 
+                                <div class="row mb-3">
+                                    <div class="col-12 col-lg-3">
+                                        <form method="get" action="/return-requests">
+                                            <div class="mb-3">
+                                                <select class="form-control" name="status">
+                                                    <option @if ($status == 'all') selected @endif>all</option>
+                                                    <option @if ($status == 'pending') selected @endif>pending</option>
+                                                    <option @if ($status == 'approved') selected @endif>approved</option>
+                                                    <option @if ($status == 'rejected') selected @endif>rejected</option>
+                                                </select>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+
 								<table id="datatablesSimple">
                                     <thead>
 										<tr>
@@ -118,6 +136,7 @@
 											<th>Customer</th>
 											<th>Status</th>
 											<th>Tanggal Pengembalian</th>
+                                            <th>action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -128,10 +147,23 @@
 											<th>Customer</th>
 											<th>Status</th>
 											<th>Tanggal Pengembalian</th>
+                                            <th>action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        
+                                        @foreach ($returnRequests as $index => $returnRequest)
+                                        <tr>
+                                            <th>{{ $index + 1 }}</th>
+                                            <th>{{ $returnRequest->identifier }}</th>
+                                            <th>{{ $returnRequest->serial_number }}</th>
+                                            <th>{{ $returnRequest->customer_name }}</th>
+                                            <th>{{ $returnRequest->request_status }}</th>
+                                            <th>{{ $returnRequest->created_at }}</th>
+                                            <th>
+                                                <a href="/return-requests/detail?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-primary">Detail</a>
+                                            </th>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
 							</div>

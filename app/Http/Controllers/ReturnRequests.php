@@ -8,13 +8,39 @@ use App\Models\ReturnRequest;
 
 class ReturnRequests extends Controller {
     public function index(Request $request) {
+        $filter = $request->query('status', 'all');
+
         if ($request->user()->role == 'admin') {
+            if ($filter == 'all') {
+                $returnRequests = ReturnRequest::orderBy('created_at', 'desc')
+                    ->get();
+            } else {
+                $returnRequests = ReturnRequest::where('request_status', $filter)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            }
+
             return view('admin.return-request', [
-                'user' => $request->user()
+                'user' => $request->user(),
+                'status' => $filter,
+                'returnRequests' => $returnRequests
             ]);
         } elseif ($request->user()->role == 'user') {
+            if ($filter == 'all') {
+                $returnRequests = ReturnRequest::where('created_by', $request->user()->user_id)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            } else {
+                $returnRequests = ReturnRequest::where('created_by', $request->user()->user_id)
+                    ->where('request_status', $filter)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            }
+
             return view('user.return-request', [
-                'user' => $request->user()
+                'user' => $request->user(),
+                'status' => $filter,
+                'returnRequests' => $returnRequests
             ]);
         }
     }
@@ -23,6 +49,16 @@ class ReturnRequests extends Controller {
         if ($request->user()->role == 'user') {
             return view('user.return-request-form', [
                 'user' => $request->user()
+            ]);
+        }
+    }
+
+    public function detail(Request $request) {
+        if ($request->user()->role == 'user') {
+            return view('user.return-request-detail', [
+                'user' => $request->user(),
+                'returnRequest' => ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
+                    ->first()
             ]);
         }
     }
