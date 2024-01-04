@@ -21,6 +21,7 @@ Route::middleware(['mustAuthenticated'])->group(function() {
     Route::prefix('/return-requests')->group(function() {
         Route::post('/_create', [ReturnRequests::class, '_create']);
 
+        Route::get('/create', [ReturnRequests::class, 'create']);
         Route::get('/', [ReturnRequests::class, 'index']);
     });
 

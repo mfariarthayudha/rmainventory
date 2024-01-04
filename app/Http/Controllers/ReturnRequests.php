@@ -19,8 +19,17 @@ class ReturnRequests extends Controller {
         }
     }
 
+    public function create(Request $request) {
+        if ($request->user()->role == 'user') {
+            return view('user.return-request-form', [
+                'user' => $request->user()
+            ]);
+        }
+    }
+
     public function _create(Request $request) {
         if ($request->user()->role == 'user') {
+
             $data = $request->validate([
                 'identifier' => ['required', 'string', 'max:64'],
                 'valuation_type' => ['required', 'string', 'max:16'],
@@ -29,7 +38,22 @@ class ReturnRequests extends Controller {
                 'type' => ['required', 'string', 'max:128'],
                 'brand' => ['required', 'string', 'max:128'],
                 'serial_number' => ['required', 'string', 'max:32'],
-                'material_picture' => ['required', 'image']
+                'material_picture' => ['required', 'image'],
+                'continue_chekbox' => ['string', 'max:1'],
+                'dead_on_arrival_checkbox' => ['string', 'max:1'],
+                'dead_on_operational_checkbox' => ['string', 'max:1'],
+                'ber_indicator_checkbox' => ['string', 'max:1'],
+                'software_error_checkbox' => ['string', 'max:1'],
+                'tributary_error_checkbox' => ['string', 'max:1'],
+                'channel_error_checkbox' => ['string', 'max:1'],
+                'port_error_checkbox' => ['string', 'max:1'],
+                'laset_tx_faulty_checkbox' => ['string', 'max:1'],
+                'physical_damage_checkbox' => ['string', 'max:1'],
+                'intermitent_checkbox' => ['string', 'max:1'],
+                'rectifier_fault_checkbox' => ['string', 'max:1'],
+                'charging_switch_checkbox' => ['string', 'max:1'],
+                'battery_faulty_checkbox' => ['string', 'max:1'],
+                'misscellaneous' => ['string', 'max:2048'],
             ]);
 
             $materialPicturePath = $request->file('material_picture')->store('uploaded-files');
