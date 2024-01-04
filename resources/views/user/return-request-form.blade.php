@@ -1,6 +1,5 @@
 <?php
 	date_default_timezone_set('asia/jakarta');
-    var_dump($errors);
 ?>
 <!DOCTYPE html>
 <html>

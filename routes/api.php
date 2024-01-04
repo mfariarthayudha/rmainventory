@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\ReturnRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/unnotified-request', function (Request $request) {
+    $unnotifiedRequest = ReturnRequest::select('return_request_id', 'customer_name')
+        ->where('admin_notified', 0)
+        ->get();
+
+    function getRequestId($returnRequest) {
+        return $returnRequest['return_request_id'];
+    }
+
+    $requestId = array_map('getRequestId', $unnotifiedRequest->toArray());
+
+    // ReturnRequest::whereIn('return_request_id', $requestId)
+    //     ->update(['admin_notified' => 1]);
+
+    return $unnotifiedRequest;
 });

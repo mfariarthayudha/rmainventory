@@ -43,7 +43,8 @@ class ReturnRequest extends Model {
         'number_of_char',
         'number_of_port',
         'misscellaneous',
-        'request_status'
+        'request_status',
+        'admin_notified'
     ];
 
     public function newUniqueId() {

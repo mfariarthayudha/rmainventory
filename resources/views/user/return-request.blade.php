@@ -107,7 +107,7 @@
 							<div class="card-header">Daftar Pengembalian</div>
 
 							<div class="card-body">
-                                {!! session('deleteUserMessage') !!}
+                                {!! session('addReturnRequestMessage') !!}
 
                                 <div class="row mb-3">
                                     <div class="col-12 col-lg-3">
