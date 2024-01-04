@@ -148,12 +148,6 @@ var_dump($errors);
                                 &middot; {{ date('F d, Y') }}
                             </div>
                         </div>
-
-                        <!-- Date range picker example-->
-                        <div class="input-group input-group-joined border-0 shadow" style="width: 16.5rem">
-                            <span class="input-group-text"><i data-feather="calendar"></i></span>
-                            <input class="form-control ps-0 pointer" id="litepickerRangePlugin" placeholder="Select date range..." />
-                        </div>
                     </div>
 
                     <div class="card mb-5">
@@ -403,10 +397,12 @@ var_dump($errors);
                                 </div>
                             </div>
 
+                            @if ($returnRequest->request_status == 'pending')
                             <div class="text-center">
                                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject-modal">Tolak</button>
                                 <a href="/return-requests/_approve?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-success">Terima</a>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
