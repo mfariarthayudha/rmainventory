@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -221,9 +222,25 @@ class ReturnRequests extends Controller
 
     public function exportPDF()
     {
-        $returnRequests = //ambildatabasefari
-            $pdf = PDF::loadView('return-request-pdf', compact('returnRequests'));
+        $returnRequests = ReturnRequest::orderBy('created_at', 'desc')->get();
 
-        return $pdf->download('daftar_pengembalian.pdf');
+        // Load the view file
+        $data = [
+            'returnRequests' => $returnRequests
+        ];
+
+        $pdf = new Dompdf();
+        $pdf->setOptions(new Options(['isHtml5ParserEnabled' => true]));
+
+        // Load HTML content from a Blade view
+        $html = View::make('return-request-pdf', $data)->render();
+
+        $pdf->loadHtml($html);
+
+        // Render the PDF
+        $pdf->render();
+
+        // Download the generated PDF file
+        return $pdf->stream('daftar_pengembalian.pdf');
     }
 }
