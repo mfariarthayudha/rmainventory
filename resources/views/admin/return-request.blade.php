@@ -130,8 +130,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="text-end mb-3">
-                                    <div id="export-excel-button" class="mb-3"></div>
+                                <div id="export-excel-button" class="text-end mb-3">
                                 </div>
 
 								<table id="datatablesSimple">
