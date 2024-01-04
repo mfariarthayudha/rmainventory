@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ReturnRequest;
-
+use App\Exports\ReturnRequestExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReturnRequests extends Controller
 {
@@ -206,6 +207,16 @@ class ReturnRequests extends Controller
         ');
 
         return redirect('/return-requests');
+    }
+    
+    public function _exportExcel(Request $request) {
+        if ($request->user()->role == 'admin') {
+            return view('admin.return-request-excel', [
+                'user' => $request->user(),
+                'returnRequests' => ReturnRequest::orderBy('created_at', 'desc')
+                    ->get()
+            ]);
+        }
     }
 
     public function exportPDF()
