@@ -219,27 +219,29 @@ class ReturnRequests extends Controller
         }
     }
 
-    public function exportPDF()
-    {
-        $returnRequests = ReturnRequest::orderBy('created_at', 'desc')->get();
+    public function _exportPdf(Request $request) {
+        if ($request->user()->role == 'admin') {
+            $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
+                ->first();
 
-        // Load the view file
-        $data = [
-            'returnRequests' => $returnRequests
-        ];
+            // Load the view file
+            $data = [
+                'returnRequest' => $returnRequest
+            ];
 
-        $pdf = new Dompdf();
-        $pdf->setOptions(new Options(['isHtml5ParserEnabled' => true]));
+            $pdf = new Dompdf();
+            $pdf->setOptions(new Options(['isHtml5ParserEnabled' => true]));
 
-        // Load HTML content from a Blade view
-        $html = View::make('return-request-pdf', $data)->render();
+            // Load HTML content from a Blade view
+            $html = View::make('return-request-pdf', $data)->render();
 
-        $pdf->loadHtml($html);
+            $pdf->loadHtml($html);
 
-        // Render the PDF
-        $pdf->render();
+            // Render the PDF
+            $pdf->render();
 
-        // Download the generated PDF file
-        return $pdf->stream('daftar_pengembalian.pdf');
+            // Download the generated PDF file
+            return $pdf->stream('daftar_pengembalian.pdf');
+        }
     }
 }

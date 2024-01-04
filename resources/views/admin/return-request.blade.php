@@ -168,7 +168,7 @@
                                             <th>
                                                 <a href="/return-requests/detail?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-primary">Detail</a>
                                                 <!-- <a href="{{ route('return-requests.export-pdf') }}" class="btn btn-warning">Export PDF</a> -->
-                                                <a href="{{ route('export.pdf') }}" class="btn btn-warning">Export PDF</a>
+                                                <a href="{{ url('/return-requests/_export-pdf?returnRequestId=' . $returnRequest->return_request_id) }}" class="btn btn-warning">Export PDF</a>
 
                                             </th>
                                         </tr>

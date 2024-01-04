@@ -220,42 +220,42 @@
                 <tr>
                     <td class="no">1</td>
                     <td class="nama">No.IO/SP2k/SO/PO/ANDOP</td>
-                    <td class="keterangan">Isian Nomor</td>
+                    <td class="keterangan">{{ $returnRequest->identifier }}</td>
                 </tr>
                 <tr>
                     <td class="no">2</td>
                     <td class="nama">Valuation Type</td>
-                    <td class="keterangan">Isian Valuation</td>
+                    <td class="keterangan">{{ $returnRequest->valuation_type }}</td>
                 </tr>
                 <tr>
                     <td class="no">3</td>
                     <td class="nama">Tanggal</td>
-                    <td class="keterangan">Isian</td>
+                    <td class="keterangan">{{ $returnRequest->created_at }}</td>
                 </tr>
                 <tr>
                     <td class="no">4</td>
                     <td class="nama">Lokasi Asal</td>
-                    <td class="keterangan">Isian</td>
+                    <td class="keterangan">{{ $returnRequest->origin }}</td>
                 </tr>
                 <tr>
                     <td class="no">5</td>
                     <td class="nama">Customer Name (CPE)</td>
-                    <td class="keterangan">Isian</td>
+                    <td class="keterangan">{{ $returnRequest->customer_name }}</td>
                 </tr>
                 <tr>
                     <td class="no">6</td>
                     <td class="nama">Merk</td>
-                    <td class="keterangan">Isian</td>
+                    <td class="keterangan">{{ $returnRequest->brand }}</td>
                 </tr>
                 <tr>
                     <td class="no">7</td>
                     <td class="nama">Type</td>
-                    <td class="keterangan">Isian</td>
+                    <td class="keterangan">{{ $returnRequest->type }}</td>
                 </tr>
                 <tr>
                     <td class="no">8</td>
                     <td class="nama">Serial Number (SN)/Batch</td>
-                    <td class="keterangan">Isian</td>
+                    <td class="keterangan">{{ $returnRequest->serial_number }}</td>
                 </tr>
 
             </tbody>
@@ -268,117 +268,106 @@
                 <div class="col-6">
                 <div class="form-check">
                         <span>07.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->continue_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Continue</label>
                     </div>
                     <div class="form-check">
                         <span>08.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->intermitent_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Intermitent</label>
                     </div>
                     <div class="form-check">
                         <span>09.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->dead_on_arrival_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Dead on Arrival</label>
                     </div>
                     <div class="form-check">
                         <span>10.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->dead_on_operational_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Dead on Operational</label>
                     </div>
                     <div class="form-check">
                         <span>11.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->ber_indicator_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">BER Indication</label>
                     </div>
                     <div class="form-check">
                         <span>12.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->software_error_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Software Error</label>
                     </div>
                     <div class="form-check">
                         <span>13.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->tributary_error_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Tributary Error</label>
                     </div>
                     <div class="form-check">
                         <span>14.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->channel_error_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Channel Error</label>
                     </div>
                     <div class="form-check">
                         <span>15.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->port_error_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Port Error</label>
                     </div>
                     <div class="form-check">
                         <span>16.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->laser_tx_faulty_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Tx Laser Faulty</label>
                     </div>
                     <div class="form-check">
-                        <span>17.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
-                        <label for="" class="form-check-label">Rx Laser Faulty</label>
-                    </div>
-                    <div class="form-check">
                         <span>18.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->physical_damage_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Pyshical Damage</label>
                     </div>
-                    <div class="form-check">
-                        <span>19.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
-                        <label for="" class="form-check-label">Miscellaneous</label>
-                        <!-- <textarea class="form-check-textarea" name="" id="" cols="30" rows="10"></textarea> -->
-                    </div>
-
                 </div>
-
 
                 <div class="col-6">
                     <div class="form-check">
                         <span>20.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->rectifier_fault_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Rectifier/Inverter fault (Input/Output Voltage/Current Fault)</label>
                     </div>
 
                     <div class="form-check">
                         <span>21.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->charging_switch_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Charging/Static Switch</label>
                     </div>
 
                     <div class="form-check">
                         <span>22.</span>
-                        <input type="checkbox" id="" name="" class="form-check-input">
+                        <input type="checkbox" class="form-check-input" @if ($returnRequest->battery_faulty_checkbox == 1) checked @endif>
                         <label for="" class="form-check-label">Battery Faulty</label>
                     </div>
 
                     <div class="form-check">
                         <span>23.</span>
                         <input type="checkbox" id="" name="" class="form-check-input">
-                        <label for="" class="form-check-label">Number of Tribu : 08</label>
+                        <label for="" class="form-check-label">Number of Tribu : {{ $returnRequest->number_of_tribu }}</label>
                     </div>
 
                     <div class="form-check">
                         <span>24.</span>
                         <input type="checkbox" id="" name="" class="form-check-input">
-                        <label for="" class="form-check-label">Number of Char : 01</label>
+                        <label for="" class="form-check-label">Number of Char : {{ $returnRequest->number_of_char }}</label>
                     </div>
 
                     <div class="form-check">
                         <span>25.</span>
                         <input type="checkbox" id="" name="" class="form-check-input">
-                        <label for="" class="form-check-label">Number of Port : 09</label>
+                        <label for="" class="form-check-label">Number of Port : {{ $returnRequest->number_of_port }}</label>
                     </div>
                 </div>
             </div>
+
+            <textarea class="form-check-textarea" cols="30" rows="10">{{ $returnRequest->misscellaneous }}</textarea>
         </div>
 
         <div class="container">
             <div class="row" id="logo">
-                <img src="{{ asset('images/logo.png') }}" alt="">
+                <img src="{{ asset('storage/' . $returnRequest->material_picture) }}">
             </div>
         </div>
 
