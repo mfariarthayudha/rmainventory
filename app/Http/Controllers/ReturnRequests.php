@@ -57,14 +57,14 @@ class ReturnRequests extends Controller {
     }
 
     public function detail(Request $request) {
-        if ($request->user()->role == 'user') {
-            return view('user.return-request-detail', [
+        if ($request->user()->role == 'admin') {
+            return view('admin.return-request-detail', [
                 'user' => $request->user(),
                 'returnRequest' => ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
                     ->first()
             ]);
-        } elseif ($request->user()->role == 'admin') {
-            return view('admin.return-request-detail', [
+        } elseif ($request->user()->role == 'user') {
+            return view('user.return-request-detail', [
                 'user' => $request->user(),
                 'returnRequest' => ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
                     ->first()
@@ -74,7 +74,6 @@ class ReturnRequests extends Controller {
 
     public function _create(Request $request) {
         if ($request->user()->role == 'user') {
-
             $data = $request->validate([
                 'identifier' => ['required', 'string', 'max:64'],
                 'valuation_type' => ['required', 'string', 'max:16'],
@@ -98,10 +97,10 @@ class ReturnRequests extends Controller {
                 'rectifier_fault_checkbox' => ['string', 'max:1'],
                 'charging_switch_checkbox' => ['string', 'max:1'],
                 'battery_faulty_checkbox' => ['string', 'max:1'],
-                'misscellaneous' => ['string', 'max:2048'],
+                'misscellaneous' => ['max:2048'],
             ]);
 
-            $materialPicturePath = $request->file('material_picture')->store('uploaded-files');
+            $materialPicturePath = asset($request->file('material_picture')->store('uploaded-files'));
 
             ReturnRequest::create([
                 ...$data,
@@ -117,7 +116,7 @@ class ReturnRequests extends Controller {
                 </div>
             ');
 
-            return back();
+            return redirect('/return-requests');
         }
     }
 
@@ -140,7 +139,7 @@ class ReturnRequests extends Controller {
         $returnRequest->request_status = 'approved';
         $returnRequest->save();
 
-        $request->session()->flash('returnRequestMessage', '
+        $request->session()->flash('approveReturnRequestMessage', '
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 Berhasil menerima pengembalian
                 <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -178,7 +177,7 @@ class ReturnRequests extends Controller {
         $returnRequest->rejection_reason = $request->query('rejection_reason');
         $returnRequest->save();
 
-        $request->session()->flash('returnRequestMessage', '
+        $request->session()->flash('rejectReturnRequestMessage', '
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 Berhasil menolak pengembalian
                 <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
