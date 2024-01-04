@@ -211,7 +211,8 @@
                                             <th>{{ $returnRequest->created_at }}</th>
                                             <th>
                                                 <a href="/return-requests/detail?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-primary">Detail</a>
-                                                <a href="#" class="btn btn-warning">Export PDf</a>
+                                                <a href="{{ route('return-requests.export-pdf') }}" class="btn btn-warning">Export PDF</a>
+
                                             </th>
                                         </tr>
                                         @endforeach

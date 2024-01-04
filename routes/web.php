@@ -44,3 +44,6 @@ Route::middleware(['mustNotAuthenticated'])->prefix('/authentication')->group(fu
 
     Route::get('/login', [Authentication::class, 'login']);
 });
+
+Route::get('/return-requests/export-pdf', 'ReturnRequestController@exportPDF')->name('return-requests.export-pdf');
+

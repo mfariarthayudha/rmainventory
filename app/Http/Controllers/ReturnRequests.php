@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use PDF;
+use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ReturnRequest;
+
 
 class ReturnRequests extends Controller {
     public function index(Request $request) {
@@ -185,4 +187,12 @@ class ReturnRequests extends Controller {
 
         return redirect('/return-requests');
     }
+
+    public function exportPDF()
+{
+    $returnRequests = //ambildatabasefari
+    $pdf = PDF::loadView('return-request-pdf', compact('returnRequests'));
+
+    return $pdf->download('daftar_pengembalian.pdf');
+}
 }
