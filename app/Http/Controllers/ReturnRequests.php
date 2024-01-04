@@ -14,8 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ReturnRequests extends Controller
 {
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $filter = $request->query('status', 'all');
 
         if ($request->user()->role == 'admin') {
@@ -53,8 +52,7 @@ class ReturnRequests extends Controller
         }
     }
 
-    public function create(Request $request)
-    {
+    public function create(Request $request) {
         if ($request->user()->role == 'user') {
             return view('user.return-request-form', [
                 'user' => $request->user()
@@ -82,8 +80,9 @@ class ReturnRequests extends Controller
         }
     }
 
-    public function _create(Request $request)
-    {
+    public function _create(Request $request) {
+        date_default_timezone_set('asia/jakarta');
+
         if ($request->user()->role == 'user') {
             $data = $request->validate([
                 'identifier' => ['required', 'string', 'max:64'],

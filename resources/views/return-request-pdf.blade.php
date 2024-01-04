@@ -157,8 +157,6 @@
         <h1>Return Material Authorization </h1>
         <h2>(RMA) </h2>
         <h2>(Untuk Dilampirkan Pada Setiap Pengembalian Material ke Gudang) </h2>
-
-
     </header>
     <main>
         <table>
