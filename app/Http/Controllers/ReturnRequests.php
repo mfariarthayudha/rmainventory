@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use PDF;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
@@ -9,8 +10,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\ReturnRequest;
 
 
-class ReturnRequests extends Controller {
-    public function index(Request $request) {
+class ReturnRequests extends Controller
+{
+    public function index(Request $request)
+    {
         $filter = $request->query('status', 'all');
 
         if ($request->user()->role == 'admin') {
@@ -48,7 +51,8 @@ class ReturnRequests extends Controller {
         }
     }
 
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         if ($request->user()->role == 'user') {
             return view('user.return-request-form', [
                 'user' => $request->user()
@@ -56,7 +60,11 @@ class ReturnRequests extends Controller {
         }
     }
 
-    public function detail(Request $request) {
+    public function detail(Request $request)
+    {
+        // $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))->first();
+        // var_dump($returnRequest); 
+    
         if ($request->user()->role == 'admin') {
             return view('admin.return-request-detail', [
                 'user' => $request->user(),
@@ -72,7 +80,8 @@ class ReturnRequests extends Controller {
         }
     }
 
-    public function _create(Request $request) {
+    public function _create(Request $request)
+    {
         if ($request->user()->role == 'user') {
             $data = $request->validate([
                 'identifier' => ['required', 'string', 'max:64'],
@@ -100,7 +109,11 @@ class ReturnRequests extends Controller {
                 'misscellaneous' => ['max:2048'],
             ]);
 
-            $materialPicturePath = asset($request->file('material_picture')->store('uploaded-files'));
+            // $materialPicturePath = asset($request->file('material_picture')->store('uploaded-files'));
+            // // $materialPicturePath = $request->file('material_picture')->store('uploaded-files', 'public');
+
+            // $materialPicturePath = $request->file('material_picture')->store('uploaded-files');
+            $materialPicturePath = $request->file('material_picture')->store('uploaded-files', 'public');
 
             ReturnRequest::create([
                 ...$data,
@@ -120,14 +133,17 @@ class ReturnRequests extends Controller {
         }
     }
 
-    public function _approve(Request $request) {
-        $validator = Validator::make($request->query(),
-        [
-            'returnRequestId' => ['required', 'string', 'exists:return_requests,return_request_id']
-        ],
-        [
-            'returnRequestId.exist' => 'Pengembalian tidak ditemukan'
-        ]);
+    public function _approve(Request $request)
+    {
+        $validator = Validator::make(
+            $request->query(),
+            [
+                'returnRequestId' => ['required', 'string', 'exists:return_requests,return_request_id']
+            ],
+            [
+                'returnRequestId.exist' => 'Pengembalian tidak ditemukan'
+            ]
+        );
 
         if ($validator->fails()) {
             return redirect('/return-requests')->withErrors($validator);
@@ -149,26 +165,31 @@ class ReturnRequests extends Controller {
         return redirect('/return-requests');
     }
 
-    public function _reject(Request $request) {
-        $validator = Validator::make($request->query(),
-        [
-            'returnRequestId' => ['required', 'string', 'exists:return_requests,return_request_id']
-        ],
-        [
-            'returnRequestId.exist' => 'Pengembalian tidak ditemukan'
-        ]);
+    public function _reject(Request $request)
+    {
+        $validator = Validator::make(
+            $request->query(),
+            [
+                'returnRequestId' => ['required', 'string', 'exists:return_requests,return_request_id']
+            ],
+            [
+                'returnRequestId.exist' => 'Pengembalian tidak ditemukan'
+            ]
+        );
 
         if ($validator->fails()) {
             return redirect('/return-requests')->withErrors($validator);
         }
 
-        $request->validate([
-            'rejection_reason' => ['required', 'string', 'max:2048']
-        ],
-        [
-            'rejection_reason.required' => 'Alasan Penolakan tidak boleh kosong',
-            'rejection_reason.max' => 'Alasan Penolakan maksimal 2048 karakter'
-        ]);
+        $request->validate(
+            [
+                'rejection_reason' => ['required', 'string', 'max:2048']
+            ],
+            [
+                'rejection_reason.required' => 'Alasan Penolakan tidak boleh kosong',
+                'rejection_reason.max' => 'Alasan Penolakan maksimal 2048 karakter'
+            ]
+        );
 
         $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
             ->first();
@@ -188,10 +209,10 @@ class ReturnRequests extends Controller {
     }
 
     public function exportPDF()
-{
-    $returnRequests = //ambildatabasefari
-    $pdf = PDF::loadView('return-request-pdf', compact('returnRequests'));
+    {
+        $returnRequests = //ambildatabasefari
+            $pdf = PDF::loadView('return-request-pdf', compact('returnRequests'));
 
-    return $pdf->download('daftar_pengembalian.pdf');
-}
+        return $pdf->download('daftar_pengembalian.pdf');
+    }
 }
