@@ -126,7 +126,9 @@
                                     </div>
                                 </div>
                                 
-
+                                <div class="text-end mb-3">
+                                    <a href="{{ url('/return-requests/create') }}" class="btn btn-success">Tambah</a>
+                                </div>
 								<table id="datatablesSimple">
                                     <thead>
 										<tr>
