@@ -101,7 +101,7 @@ class ReturnRequests extends Controller
                 'brand' => ['required', 'string', 'max:128'],
                 'serial_number' => ['required', 'string', 'max:32'],
                 'material_picture' => ['required', 'image'],
-                'continue_chekbox' => ['string', 'max:1'],
+                'continue_checkbox' => ['string', 'max:1'],
                 'dead_on_arrival_checkbox' => ['string', 'max:1'],
                 'dead_on_operational_checkbox' => ['string', 'max:1'],
                 'ber_indicator_checkbox' => ['string', 'max:1'],
