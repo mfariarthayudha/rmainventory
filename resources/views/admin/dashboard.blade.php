@@ -260,7 +260,7 @@
                 axios('https://rmainventory.com/api/unnotified-request')
                 .then(response => {
                     if (response.data.length > 0) {
-                        document.querySelect('#notification-badge').classList.remove('d-none')
+                        document.querySelector('#notification-badge').classList.remove('d-none')
                     }
 
                     response.data.forEach(notification => {
