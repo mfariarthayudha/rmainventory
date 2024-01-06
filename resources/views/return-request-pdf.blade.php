@@ -408,11 +408,11 @@ date_default_timezone_set('asia/jakarta');
                         <div style="width: 50%; float: left;">
                         <div>Foto Material :</div>
 
-                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("storage/" . $returnRequest->material_picture))) }}" alt="" style="max-width: 350px;">
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("storage/" . $returnRequest->material_picture))) }}" alt="" style="max-width: 300px; max-height: 300px;">
                        
                        <br>
                             <div>Tanda Tangan User :</div>
-                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("storage/" . $returnRequest->material_picture))) }}" alt="" style="max-width: 200px;">
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("storage/" . $returnRequest->material_picture))) }}" alt="" style="max-width: 300px; max-height: 300px;">
 
                         </div>
 
