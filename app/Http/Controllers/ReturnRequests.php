@@ -235,9 +235,13 @@ class ReturnRequests extends Controller
             $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
                 ->first();
 
+            $creator = User::where('user_id', $returnRequest->created_by)
+                ->first();
+
             // Load the view file
             $data = [
-                'returnRequest' => $returnRequest
+                'returnRequest' => $returnRequest,
+                'creator' => $creator
             ];
 
             $pdf = new Dompdf();
