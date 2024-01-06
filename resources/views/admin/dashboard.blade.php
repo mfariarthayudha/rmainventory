@@ -256,8 +256,6 @@
             setInterval(() => {
                 axios('http://localhost:8000/api/unnotified-request')
                 .then(response => {
-                    $('#notification').children(':not(:first-child)').remove()
-
                     response.data.forEach(notification => {
                         $('#notification').append(`
                             <a class="dropdown-item dropdown-notifications-item" href="javascript:void(0)">
