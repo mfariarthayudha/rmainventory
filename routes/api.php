@@ -26,8 +26,8 @@ Route::get('/unnotified-request', function (Request $request) {
 
     $requestId = array_map('getRequestId', $unnotifiedRequest->toArray());
 
-    // ReturnRequest::whereIn('return_request_id', $requestId)
-    //     ->update(['admin_notified' => 1]);
+    ReturnRequest::whereIn('return_request_id', $requestId)
+        ->update(['admin_notified' => 1]);
 
     return $unnotifiedRequest;
 });
