@@ -32,7 +32,10 @@
             <ul class="navbar-nav align-items-center ms-auto">
                 <!-- Alerts Dropdown-->
                 <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i data-feather="bell"></i>
+                        <span id="notification-badge" class="badge bg-success text-dark d-none">!</span>
+                    </a>
                     <div id="notification" class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
                         <h6 class="dropdown-header dropdown-notifications-header">
                             <i class="me-2" data-feather="bell"></i>
@@ -256,6 +259,10 @@
             setInterval(() => {
                 axios('https://rmainventory.com/api/unnotified-request')
                 .then(response => {
+                    if (response.data.length > 0) {
+                        document.querySelect('#notification-badge').classList.remove('d-none')
+                    }
+
                     response.data.forEach(notification => {
                         $('#notification').append(`
                             <a class="dropdown-item dropdown-notifications-item" href="javascript:void(0)">
