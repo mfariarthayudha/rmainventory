@@ -254,7 +254,7 @@
             });
 
             setInterval(() => {
-                axios('http://localhost:8000/api/unnotified-request')
+                axios('https://rmainventory.com/api/unnotified-request')
                 .then(response => {
                     response.data.forEach(notification => {
                         $('#notification').append(`
