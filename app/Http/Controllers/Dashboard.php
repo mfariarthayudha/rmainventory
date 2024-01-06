@@ -17,7 +17,7 @@ class Dashboard extends Controller {
                 'approvedReturnRequest' => ReturnRequest::where('request_status', 'approved')
                     ->count(),
                 'rejectedReturnRequest' => ReturnRequest::where('request_status', 'rejected')
-                    ->count()
+                    ->count(),
             ]);
         } elseif ($request->user()->role == 'user') {
             return view('user.dashboard', [

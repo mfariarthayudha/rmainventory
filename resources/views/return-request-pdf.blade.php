@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>RMA (Isi tarik Nama atau nomer Kali ya ri)</title>
+    <title>RMA {{ $returnRequest->identifier }}</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>

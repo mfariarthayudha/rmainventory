@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ReturnRequest;
 use App\Exports\ReturnRequestExport;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Models\User;
 
 class ReturnRequests extends Controller
 {
@@ -66,15 +66,23 @@ class ReturnRequests extends Controller
         // var_dump($returnRequest); 
     
         if ($request->user()->role == 'admin') {
+            $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
+            ->first();
+
             return view('admin.return-request-detail', [
                 'user' => $request->user(),
-                'returnRequest' => ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
+                'returnRequest' => $returnRequest,
+                'creator' => User::where('user_id', $returnRequest->created_by)
                     ->first()
             ]);
         } elseif ($request->user()->role == 'user') {
+            $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
+            ->first();
+
             return view('user.return-request-detail', [
                 'user' => $request->user(),
-                'returnRequest' => ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
+                'returnRequest' => $returnRequest,
+                'creator' => User::where('user_id', $returnRequest->created_by)
                     ->first()
             ]);
         }
@@ -101,12 +109,15 @@ class ReturnRequests extends Controller
                 'tributary_error_checkbox' => ['string', 'max:1'],
                 'channel_error_checkbox' => ['string', 'max:1'],
                 'port_error_checkbox' => ['string', 'max:1'],
-                'laset_tx_faulty_checkbox' => ['string', 'max:1'],
+                'laser_tx_faulty_checkbox' => ['string', 'max:1'],
                 'physical_damage_checkbox' => ['string', 'max:1'],
                 'intermitent_checkbox' => ['string', 'max:1'],
                 'rectifier_fault_checkbox' => ['string', 'max:1'],
                 'charging_switch_checkbox' => ['string', 'max:1'],
                 'battery_faulty_checkbox' => ['string', 'max:1'],
+                'number_of_tribu' => ['min:0'],
+                'number_of_char' => ['min:0'],
+                'number_of_port' => ['min:0'],
                 'misscellaneous' => ['max:2048'],
             ]);
 

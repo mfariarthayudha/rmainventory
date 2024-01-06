@@ -109,16 +109,26 @@
 							<div class="card-body">
                                 {!! session('addUserMessage') !!}
 
-								<form method="post" action="/users/_add-user">
+								<form method="post" action="/users/_add-user" enctype="multipart/form-data">
                                     @csrf
 
-									<div class="mb-3">
-										<label for="username-input">Nama Pengguna</label>
-										<input class="form-control" id="username-input" type="text" name="username" value="{{ old('username') }}" placeholder="Masukkan Nama Pengguna">
-                                        <small class="text-danger">{{ $errors->first('username') }}</small>
-                                    </div>
-
 									<div class="row">
+                                        <div class="col-12 col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="username-input">Nama Pengguna</label>
+                                                <input class="form-control" id="username-input" type="text" name="username" value="{{ old('username') }}" placeholder="Masukkan Nama Pengguna">
+                                                <small class="text-danger">{{ $errors->first('username') }}</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="signature-input">Tanda Tangan</label>
+                                                <input class="form-control" id="signature-input" type="file" name="signature">
+                                                <small class="text-danger">{{ $errors->first('signature') }}</small>
+                                            </div>
+                                        </div>
+
 										<div class="col-12 col-lg-6">
 											<div class="mb-3">
 												<label for="password-input">Kata Sandi</label>

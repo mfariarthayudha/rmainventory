@@ -222,6 +222,7 @@ var_dump($errors);
                                         <input class="form-control" id="serial-number-input" type="text" name="serial_number" value="{{ $returnRequest->serial_number }}" disabled>
                                     </div>
                                 </div>
+                                
                                 <div class="col-12 col-lg-6">
                                     <div class="card">
                                         <div class="card-header">Foto Material</div>
@@ -235,9 +236,14 @@ var_dump($errors);
                                     </div>
                                 </div>
 
-
-
-
+                                @if ($returnRequest->request_status == 'rejected')
+                                    <div class="col-12 col-lg-6">
+                                        <div class="mb-3">
+                                            <label for="serial-number-input">Alasan Penolakan</label>
+                                            <input class="form-control" id="serial-number-input" type="text" value="{{ $returnRequest->rejection_reason }}" disabled>
+                                        </div>
+                                    </div>
+                                    @endif
                             </div>
 
                             <div class="alert alert-info mb-3" role="alert">
@@ -395,6 +401,21 @@ var_dump($errors);
                                     <label for="misscellaneous-input">Misscellaneous</label>
                                     <textarea class="form-control" id="misscellaneous-input" name="misscellaneous" rows="3" disabled>{{ $returnRequest->misscellaneous }}</textarea>
                                 </div>
+
+                                <div class="col-1">
+                                        <table>
+                                            <th>
+                                                <tr>
+                                                    <img class="w-100" src="{{ asset('storage/' . $creator->signature) }}">
+                                                </tr>
+                                            </th>
+                                            <tbody>
+                                                <tr>
+                                                    <th>{{ $creator->username }}</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                             </div>
 
                             @if ($returnRequest->request_status == 'pending')

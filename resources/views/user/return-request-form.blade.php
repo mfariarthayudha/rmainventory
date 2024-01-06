@@ -310,7 +310,7 @@ date_default_timezone_set('asia/jakarta');
                                                 <label for="battery-fault"><b>Battery Faulty</b></label>
 
                                                 <div class="form-check mb-3">
-                                                    <input class="form-check-input" id="battery-fault" name="battery_fault_checkbox" type="checkbox" value="1">
+                                                    <input class="form-check-input" id="battery-fault" name="battery_faulty_checkbox" type="checkbox" value="1">
                                                 </div>
                                             </div>
 
@@ -341,7 +341,24 @@ date_default_timezone_set('asia/jakarta');
                                         <textarea class="form-control" id="misscellaneous-input" name="misscellaneous" rows="3">{{ old('misscellaneous') }}</textarea>
                                         <small class="text-danger">{{ $errors->first('misscellaneous') }}</small>
                                     </div>
+
+                                    <div class="col-1">
+                                        <table>
+                                            <th>
+                                                <tr>
+                                                    <img class="w-100" src="{{ asset('storage/' . $user->signature) }}">
+                                                </tr>
+                                            </th>
+                                            <tbody>
+                                                <tr>
+                                                    <th>{{ $user->username }}</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
+
+                                
 
                                 <div class="text-end">
                                     <button type="submit" class="btn btn-primary">Tambah</button>

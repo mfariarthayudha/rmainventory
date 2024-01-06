@@ -1,5 +1,7 @@
 <?php
 	date_default_timezone_set('asia/jakarta');
+
+    $chartData = [$totalReturnRequest, $pendingReturnRequest, $approvedReturnRequest, $rejectedReturnRequest];
 ?>
 <!DOCTYPE html>
 <html>
@@ -155,17 +157,82 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">Chart pengembalian</div>
+
+                            <div class="card-body">
+                                <div class="chart-bar"><canvas id="return-request-chart" width="100%" height="50"></canvas></div>
+                            </div>
+                        </div>
                     </div>
                 </main>
             </div>
         </div>
+
+        <div id="chart-data" data-chart-data="@json($chartData)"></div>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/sb-admin-pro/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="/sb-admin-pro/assets/demo/chart-area-demo.js"></script>
-        <script src="/sb-admin-pro/assets/demo/chart-bar-demo.js"></script>
-        <script src="/sb-admin-pro/assets/demo/chart-pie-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
         <script src="/sb-admin-pro/js/litepicker.js"></script>
+
+        <script>
+            let chartData = JSON.parse(document.querySelector('#chart-data').dataset.chartData)
+            var ctx = document.getElementById("return-request-chart");
+            var myBarChart = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["Pengembalian", "Menunggu", "Disetujui", "Ditolak"],
+                    datasets: [{
+                        label: "Total",
+                        backgroundColor: "rgba(0, 97, 242, 1)",
+                        hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
+                        borderColor: "#4e73df",
+                        data: chartData,
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            left: 10,
+                            right: 25,
+                            top: 25,
+                            bottom: 0
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            time: {
+                                unit: "month"
+                            },
+                            gridLines: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                maxTicksLimit: 6
+                            }
+                        }],
+                        yAxes: [{
+                            
+                            gridLines: {
+                                color: "rgb(234, 236, 244)",
+                                zeroLineColor: "rgb(234, 236, 244)",
+                                drawBorder: false,
+                                borderDash: [2],
+                                zeroLineBorderDash: [2]
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    
+                }
+            });
+        </script>
     </body>
 </html>
