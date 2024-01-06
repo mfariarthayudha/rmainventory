@@ -411,9 +411,8 @@ date_default_timezone_set('asia/jakarta');
                             <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("storage/" . $returnRequest->material_picture))) }}" alt="" style="max-width: 100px; max-height: 100px;">
                        
                        <br>
-                            <div>Tanda Tangan User :</div>
                             <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("storage/" . $creator->signature))) }}" alt="" style="max-width: 100px; max-height: 100px;">
-
+                            <div>{{ $creator->username }}</div>
                         </div>
 
                         <div style="width: 50%; float: left;">
