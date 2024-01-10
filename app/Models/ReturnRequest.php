@@ -34,6 +34,7 @@ class ReturnRequest extends Model {
         'channel_error_checkbox',
         'port_error_checkbox',
         'laser_tx_faulty_checkbox',
+        'laser_rx_faulty_checkbox',
         'physical_damage_checkbox',
         'intermitent_checkbox',
         'rectifier_fault_checkbox',

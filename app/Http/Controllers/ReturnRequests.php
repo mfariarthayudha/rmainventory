@@ -110,6 +110,7 @@ class ReturnRequests extends Controller
                 'channel_error_checkbox' => ['string', 'max:1'],
                 'port_error_checkbox' => ['string', 'max:1'],
                 'laser_tx_faulty_checkbox' => ['string', 'max:1'],
+                'laser_rx_faulty_checkbox' => ['string', 'max:1'],
                 'physical_damage_checkbox' => ['string', 'max:1'],
                 'intermitent_checkbox' => ['string', 'max:1'],
                 'rectifier_fault_checkbox' => ['string', 'max:1'],

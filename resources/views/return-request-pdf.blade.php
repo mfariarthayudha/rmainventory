@@ -250,42 +250,42 @@ date_default_timezone_set('asia/jakarta');
                         <tr>
                             <td class="no">1</td>
                             <td class="nama">No.IO/SP2k/SO/PO/ANDOP</td>
-                            <td class="keterangan">{{ $returnRequest->identifier }}</td>
+                            <td class="keterangan">: {{ $returnRequest->identifier }}</td>
                         </tr>
                         <tr>
                             <td class="no">2</td>
                             <td class="nama">Valuation Type</td>
-                            <td class="keterangan">{{ $returnRequest->valuation_type }}</td>
+                            <td class="keterangan">: {{ $returnRequest->valuation_type }}</td>
                         </tr>
                         <tr>
                             <td class="no">3</td>
                             <td class="nama">Tanggal</td>
-                            <td class="keterangan">{{ $returnRequest->created_at }}</td>
+                            <td class="keterangan">: {{ $returnRequest->created_at }}</td>
                         </tr>
                         <tr>
                             <td class="no">4</td>
                             <td class="nama">Lokasi Asal</td>
-                            <td class="keterangan">{{ $returnRequest->origin }}</td>
+                            <td class="keterangan">: {{ $returnRequest->origin }}</td>
                         </tr>
                         <tr>
                             <td class="no">5</td>
                             <td class="nama">Customer Name (CPE)</td>
-                            <td class="keterangan">{{ $returnRequest->customer_name }}</td>
+                            <td class="keterangan">: {{ $returnRequest->customer_name }}</td>
                         </tr>
                         <tr>
                             <td class="no">6</td>
                             <td class="nama">Merk</td>
-                            <td class="keterangan">{{ $returnRequest->brand }}</td>
+                            <td class="keterangan">: {{ $returnRequest->brand }}</td>
                         </tr>
                         <tr>
                             <td class="no">7</td>
                             <td class="nama">Type</td>
-                            <td class="keterangan">{{ $returnRequest->type }}</td>
+                            <td class="keterangan">: {{ $returnRequest->type }}</td>
                         </tr>
                         <tr>
                             <td class="no">8</td>
                             <td class="nama">Serial Number (SN)/Batch</td>
-                            <td class="keterangan">{{ $returnRequest->serial_number }}</td>
+                            <td class="keterangan">: {{ $returnRequest->serial_number }}</td>
                         </tr>
 
                     </tbody>
@@ -341,7 +341,13 @@ date_default_timezone_set('asia/jakarta');
                             <div class="form-check">
                                 <span>16.</span>
                                 <input type="checkbox" class="form-check-input" @if ($returnRequest->laser_tx_faulty_checkbox == 1) checked @endif>
-                                <label for="" class="form-check-label">Tx Laser Faulty</label>
+                                <label for="" class="form-check-label">TX Laser Faulty</label>
+                            </div>
+
+                            <div class="form-check">
+                                <span>17.</span>
+                                <input type="checkbox" class="form-check-input" @if ($returnRequest->laser_rx_faulty_checkbox == 1) checked @endif>
+                                <label for="" class="form-check-label">RX Laser Faulty</label>
                             </div>
 
                             <div class="form-check">

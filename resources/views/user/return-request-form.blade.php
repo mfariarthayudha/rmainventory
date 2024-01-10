@@ -265,7 +265,16 @@ date_default_timezone_set('asia/jakarta');
 
                                             <div class="form-check">
                                                 <input class="form-check-input" id="laser-tx-faulty" name="laser_tx_faulty_checkbox" type="checkbox" value="1">
-                                                <label class="form-check-label" for="laser-tx-faulty">Only Optical Modul No.Rx. Frame error</label>
+                                                <label class="form-check-label" for="laser-tx-faulty">Only Optical Modul TX Loss, No Signal, High Temp, Laser Bias</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mb-3">
+                                            <label for="laser-tx-faulty"><b>Laser RX Faulty</b></label>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="laser-rx-faulty" name="laser_rx_faulty_checkbox" type="checkbox" value="1">
+                                                <label class="form-check-label" for="laser-rx-faulty">Only Optical Modul No.Rx. Frame error</label>
                                             </div>
                                         </div>
 
