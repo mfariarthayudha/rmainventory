@@ -447,7 +447,7 @@ var_dump($errors);
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger" type="button">Tolak</button>
+                        <button type="submit" class="btn btn-primary" type="button">Submit</button>
                     </div>
                 </form>
             </div>

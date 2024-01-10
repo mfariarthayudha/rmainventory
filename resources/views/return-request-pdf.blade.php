@@ -356,43 +356,40 @@ date_default_timezone_set('asia/jakarta');
                                 <label for="" class="form-check-label">Pyshical Damage</label>
                             </div>
                             <div class="form-check">
-                                <span>20.</span>
+                                <span>19.</span>
                                 <input type="checkbox" class="form-check-input" @if ($returnRequest->rectifier_fault_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Rectifier/Inverter fault (Input/Output Voltage/Current Fault)</label>
                             </div>
 
                             <div class="form-check">
-                                <span>21.</span>
+                                <span>20.</span>
                                 <input type="checkbox" class="form-check-input" @if ($returnRequest->charging_switch_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Charging/Static Switch</label>
                             </div>
 
                             <div class="form-check">
-                                <span>22.</span>
+                                <span>21.</span>
                                 <input type="checkbox" class="form-check-input" @if ($returnRequest->battery_faulty_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Battery Faulty</label>
                             </div>
 
                             <div class="form-check">
-                                <span>23.</span>
-                                <input type="checkbox" id="" name="" class="form-check-input">
+                                <span>22.</span>
                                 <label for="" class="form-check-label">Number of Tribu : {{ $returnRequest->number_of_tribu }}</label>
                             </div>
 
                             <div class="form-check">
-                                <span>24.</span>
-                                <input type="checkbox" id="" name="" class="form-check-input">
+                                <span>23.</span>
                                 <label for="" class="form-check-label">Number of Char : {{ $returnRequest->number_of_char }}</label>
                             </div>
 
                             <div class="form-check">
-                                <span>25.</span>
-                                <input type="checkbox" id="" name="" class="form-check-input">
+                                <span>24.</span>
                                 <label for="" class="form-check-label">Number of Port : {{ $returnRequest->number_of_port }}</label>
                             </div>
 
                             <div class="form-check">
-                                <span>26.</span>
+                                <span>25.</span>
                                 <label for="" class="form-check-label">Note</label>
                                 <input type="text" id="" value="{{ $returnRequest->misscellaneous }}" class="form-check-input">
                             </div>
