@@ -192,17 +192,23 @@
                     <th>Merk</th>
                     <th>Type</th>
                     <th>Serial Number (SN) / Batch</th>
+                    <th>Tanggal Input</th>
+                    <th>Tanggal Approve</th>
+                    <th>Tanggal Reject</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th>No.IO/SP2k/SO/PO/ANDOP</th>
+                <th>No.IO/SP2k/SO/PO/ANDOP</th>
                     <th>Valuation Type</th>
                     <th>Lokasi Asal</th>
                     <th>Customer Name</th>
                     <th>Merk</th>
                     <th>Type</th>
                     <th>Serial Number (SN) / Batch</th>
+                    <th>Tanggal Input</th>
+                    <th>Tanggal Approve</th>
+                    <th>Tanggal Reject</th>
                 </tr>
             </tfoot>
             <tbody>
@@ -215,6 +221,9 @@
                     <th>{{ $returnRequest->brand }}</th>
                     <th>{{ $returnRequest->type }}</th>
                     <th>{{ $returnRequest->serial_number }}</th>
+                    <th>{{ $returnRequest->created_at }}</th>
+                    <th>@if ($returnRequest->request_status == 'approved') {{ $returnRequest->updated_at }} @endif</th>
+                    <th>@if ($returnRequest->request_status == 'rejected') {{ $returnRequest->updated_at }} @endif</th>
                 </tr>
                 @endforeach
             </tbody>
