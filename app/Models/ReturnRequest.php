@@ -45,7 +45,10 @@ class ReturnRequest extends Model {
         'number_of_port',
         'misscellaneous',
         'request_status',
-        'admin_notified'
+        'admin_notified',
+        'rejected_at',
+        'resubmited_at',
+        'rerejected_at'
     ];
 
     public function newUniqueId() {

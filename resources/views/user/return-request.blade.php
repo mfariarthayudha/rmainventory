@@ -157,6 +157,9 @@
                                             <th>{{ $returnRequest->created_at }}</th>
                                             <th>
                                                 <a href="/return-requests/detail?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-primary">Detail</a>
+                                                @if ($returnRequest->request_status == "rejected" && $returnRequest->rerejected_at == NULL)
+                                                    <a href="/return-requests/edit?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-secondary">Edit</a>
+                                                @endif
                                             </th>
                                         </tr>
                                         @endforeach

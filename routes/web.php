@@ -20,12 +20,14 @@ use App\Http\Controllers\Users;
 Route::middleware(['mustAuthenticated'])->group(function() {
     Route::prefix('/return-requests')->group(function() {
         Route::post('/_create', [ReturnRequests::class, '_create']);
+        Route::post('/_edit', [ReturnRequests::class, '_edit']);
         Route::get('/_approve', [ReturnRequests::class, '_approve']);
         Route::get('/_reject', [ReturnRequests::class, '_reject']);
         Route::get('/_export-excel', [ReturnRequests::class, '_exportExcel']);
         Route::get('/_export-pdf', [ReturnRequests::class, '_exportPdf']);
 
         Route::get('/create', [ReturnRequests::class, 'create']);
+        Route::get('/edit', [ReturnRequests::class, 'edit']);
         Route::get('/detail', [ReturnRequests::class, 'detail']);
         Route::get('/', [ReturnRequests::class, 'index']);
     });

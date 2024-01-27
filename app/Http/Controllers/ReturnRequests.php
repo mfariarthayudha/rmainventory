@@ -15,7 +15,14 @@ use App\Models\User;
 class ReturnRequests extends Controller
 {
     public function index(Request $request) {
-        $filter = $request->query('status', 'all');
+        $filter;
+
+        if ($request->has('status')) {
+            $filter = $request->query('status');
+            $request->session()->put('filter', $filter);
+        } else {
+            $filter = $request->session()->get('filter', 'all');
+        }
 
         if ($request->user()->role == 'admin') {
             if ($filter == 'all') {
@@ -56,6 +63,16 @@ class ReturnRequests extends Controller
         if ($request->user()->role == 'user') {
             return view('user.return-request-form', [
                 'user' => $request->user()
+            ]);
+        }
+    }
+
+    public function edit(Request $request) {
+        if ($request->user()->role == 'user') {
+            return view('user.return-request-edit', [
+                'user' => $request->user(),
+                'returnRequest' => ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
+                    ->first()
             ]);
         }
     }
@@ -146,6 +163,68 @@ class ReturnRequests extends Controller
         }
     }
 
+    public function _edit(Request $request) {
+        date_default_timezone_set('asia/jakarta');
+
+        if ($request->user()->role == 'user') {
+            $data = $request->validate([
+                'valuation_type' => ['required', 'string', 'max:16'],
+                'origin' => ['required', 'string', 'max:64'],
+                'customer_name' => ['required', 'string', 'max:128'],
+                'type' => ['required', 'string', 'max:128'],
+                'brand' => ['required', 'string', 'max:128'],
+                'serial_number' => ['required', 'string', 'max:32'],
+                'material_picture' => ['image'],
+                'continue_checkbox' => ['string', 'max:1'],
+                'dead_on_arrival_checkbox' => ['string', 'max:1'],
+                'dead_on_operational_checkbox' => ['string', 'max:1'],
+                'ber_indicator_checkbox' => ['string', 'max:1'],
+                'software_error_checkbox' => ['string', 'max:1'],
+                'tributary_error_checkbox' => ['string', 'max:1'],
+                'channel_error_checkbox' => ['string', 'max:1'],
+                'port_error_checkbox' => ['string', 'max:1'],
+                'laser_tx_faulty_checkbox' => ['string', 'max:1'],
+                'laser_rx_faulty_checkbox' => ['string', 'max:1'],
+                'physical_damage_checkbox' => ['string', 'max:1'],
+                'intermitent_checkbox' => ['string', 'max:1'],
+                'rectifier_fault_checkbox' => ['string', 'max:1'],
+                'charging_switch_checkbox' => ['string', 'max:1'],
+                'battery_faulty_checkbox' => ['string', 'max:1'],
+                'number_of_tribu' => ['min:0'],
+                'number_of_char' => ['min:0'],
+                'number_of_port' => ['min:0'],
+                'misscellaneous' => ['max:2048'],
+            ]);
+
+            // $materialPicturePath = asset($request->file('material_picture')->store('uploaded-files'));
+            // // $materialPicturePath = $request->file('material_picture')->store('uploaded-files', 'public');
+
+            // $materialPicturePath = $request->file('material_picture')->store('uploaded-files');
+            
+
+            if ($request->hasFile('material_picture')) {
+                $data['material_picture'] = $request->file('material_picture')->store('uploaded-files', 'public');
+            }
+
+            ReturnRequest::where('return_request_id', $request->input('return_request_id'))
+                ->update([
+                    ...$data,
+                    'created_by' => $request->user()->user_id,
+                    'request_status' => 'pending',
+                    'resubmited_at' => date('Y-m-d H:i:s')
+                ]);
+
+            $request->session()->flash('addReturnRequestMessage', '
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Berhasil mengedit pengembalian
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            ');
+
+            return redirect('/return-requests');
+        }
+    }
+
     public function _approve(Request $request)
     {
         $validator = Validator::make(
@@ -178,8 +257,9 @@ class ReturnRequests extends Controller
         return redirect('/return-requests');
     }
 
-    public function _reject(Request $request)
-    {
+    public function _reject(Request $request){
+        date_default_timezone_set('Asia/Jakarta');
+
         $validator = Validator::make(
             $request->query(),
             [
@@ -209,6 +289,11 @@ class ReturnRequests extends Controller
 
         $returnRequest->request_status = 'rejected';
         $returnRequest->rejection_reason = $request->query('rejection_reason');
+        if ($returnRequest->rejected_at == NULL) {
+            $returnRequest->rejected_at = date('Y-m-d H:i:s');
+        } else {
+            $returnRequest->rerejected_at = date('Y-m-d H:i:s');
+        }
         $returnRequest->save();
 
         $request->session()->flash('rejectReturnRequestMessage', '

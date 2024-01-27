@@ -195,11 +195,14 @@
                     <th>Tanggal Input</th>
                     <th>Tanggal Approve</th>
                     <th>Tanggal Reject</th>
+                    <th>Tanggal edit</th>
+                    <th>Tanggal Submit Kembali</th>
+                    <th>Tanggal Ditolak Kembali</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                <th>No.IO/SP2k/SO/PO/ANDOP</th>
+                    <th>No.IO/SP2k/SO/PO/ANDOP</th>
                     <th>Valuation Type</th>
                     <th>Lokasi Asal</th>
                     <th>Customer Name</th>
@@ -209,6 +212,9 @@
                     <th>Tanggal Input</th>
                     <th>Tanggal Approve</th>
                     <th>Tanggal Reject</th>
+                    <th>Tanggal edit</th>
+                    <th>Tanggal Submit Kembali</th>
+                    <th>Tanggal Ditolak Kembali</th>
                 </tr>
             </tfoot>
             <tbody>
@@ -224,6 +230,9 @@
                     <th>{{ $returnRequest->created_at }}</th>
                     <th>@if ($returnRequest->request_status == 'approved') {{ $returnRequest->updated_at }} @endif</th>
                     <th>@if ($returnRequest->request_status == 'rejected') {{ $returnRequest->updated_at }} @endif</th>
+                    <th>@if ($returnRequest->request_status == 'rejected') {{ $returnRequest->updated_at }} @endif</th>
+                    <th>@if ($returnRequest->resubmited_at != NULL) {{ $returnRequest->resubmited_at }} @endif</th>
+                    <th>@if ($returnRequest->rerejected_at != NULL) {{ $returnRequest->rerejected_at }} @endif</th>
                 </tr>
                 @endforeach
             </tbody>
