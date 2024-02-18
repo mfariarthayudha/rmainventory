@@ -230,10 +230,12 @@ class ReturnRequests extends Controller
         $validator = Validator::make(
             $request->query(),
             [
-                'returnRequestId' => ['required', 'string', 'exists:return_requests,return_request_id']
+                'returnRequestId' => ['required', 'string', 'exists:return_requests,return_request_id'],
+                'nomor_gr' => ['required', 'string', 'max:2048']
             ],
             [
-                'returnRequestId.exist' => 'Pengembalian tidak ditemukan'
+                'returnRequestId.exist' => 'Pengembalian tidak ditemukan',
+                'nomor_gr.required' => 'Nomor GR tidak boleh kosong',
             ]
         );
 
@@ -245,6 +247,7 @@ class ReturnRequests extends Controller
             ->first();
 
         $returnRequest->request_status = 'approved';
+        $returnRequest->nomor_gr = $request->query('nomor_gr');
         $returnRequest->save();
 
         $request->session()->flash('approveReturnRequestMessage', '

@@ -48,7 +48,8 @@ class ReturnRequest extends Model {
         'admin_notified',
         'rejected_at',
         'resubmited_at',
-        'rerejected_at'
+        'rerejected_at',
+        'nomor_gr'
     ];
 
     public function newUniqueId() {

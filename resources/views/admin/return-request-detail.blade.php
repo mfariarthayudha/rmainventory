@@ -430,13 +430,36 @@ var_dump($errors);
                             @if ($returnRequest->request_status == 'pending')
                             <div class="text-center">
                                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject-modal">Tolak</button>
-                                <a href="/return-requests/_approve?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-success">Terima</a>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approve-modal">Terima</button>
                             </div>
                             @endif
                         </div>
                     </div>
                 </div>
             </main>
+        </div>
+    </div>
+
+    <div class="modal fade" id="approve-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="get" action="/return-requests/_approve">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Terima Pengembalian</h5>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="returnRequestId" value="{{ $returnRequest->return_request_id }}">
+
+                        <label for="rejection-reason">Nomor GR</label>
+                        <textarea class="form-control" id="rejection-reason" name="nomor_gr" rows="3"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary" type="button">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

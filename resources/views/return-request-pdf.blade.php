@@ -227,7 +227,7 @@ date_default_timezone_set('asia/jakarta');
         <!-- <div id="logo">
       <img src="{{ asset('images/header.png') }}" alt="PLN Logo" height="150px">
       </div> -->
-        <h1>Return Material Authorization </h1>
+        <h1>Return Material Authorization @if ($returnRequest->nomor_gr) ({{ $returnRequest->nomor_gr }}) @endif</h1>
         <!-- <h2>(RMA) </h2> -->
         <h2>(Untuk Dilampirkan Pada Setiap Pengembalian Material ke Gudang) </h2>
     </header>
