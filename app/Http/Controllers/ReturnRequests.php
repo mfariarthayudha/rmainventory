@@ -345,7 +345,12 @@ class ReturnRequests extends Controller
             $pdf->render();
 
             // Download the generated PDF file
-            return $pdf->stream('daftar_pengembalian.pdf');
+            if ($returnRequest->nomor_gr != null) {
+                return $pdf->stream($returnRequest->nomor_gr . '.pdf');
+            } else {
+                return $pdf->stream('return_request.pdf');
+            }
+            
         }
     }
 }
