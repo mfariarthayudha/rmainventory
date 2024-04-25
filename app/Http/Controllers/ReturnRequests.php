@@ -117,7 +117,8 @@ class ReturnRequests extends Controller
                 'type' => ['required', 'string', 'max:128'],
                 'brand' => ['required', 'string', 'max:128'],
                 'serial_number' => ['required', 'string', 'max:32'],
-                'material_picture' => ['required', 'image'],
+                'material_picture_1' => ['required', 'image'],
+                'material_picture_2' => ['required', 'image'],
                 'continue_checkbox' => ['string', 'max:1'],
                 'dead_on_arrival_checkbox' => ['string', 'max:1'],
                 'dead_on_operational_checkbox' => ['string', 'max:1'],
@@ -143,12 +144,15 @@ class ReturnRequests extends Controller
             // // $materialPicturePath = $request->file('material_picture')->store('uploaded-files', 'public');
 
             // $materialPicturePath = $request->file('material_picture')->store('uploaded-files');
-            $materialPicturePath = $request->file('material_picture')->store('uploaded-files', 'public');
+            $materialPicture1Path = $request->file('material_picture_1')->store('uploaded-files', 'public');
+            $materialPicture2Path = $request->file('material_picture_2')->store('uploaded-files', 'public');
+
 
             ReturnRequest::create([
                 ...$data,
                 'created_by' => $request->user()->user_id,
-                'material_picture' => $materialPicturePath,
+                'material_picture_1' => $materialPicture1Path,
+                'material_picture_2' => $materialPicture2Path,
                 'request_status' => 'pending'
             ]);
 
@@ -174,7 +178,8 @@ class ReturnRequests extends Controller
                 'type' => ['required', 'string', 'max:128'],
                 'brand' => ['required', 'string', 'max:128'],
                 'serial_number' => ['required', 'string', 'max:32'],
-                'material_picture' => ['image'],
+                'material_picture_1' => ['image'],
+                'material_picture_2' => ['image'],
                 'continue_checkbox' => ['string', 'max:1'],
                 'dead_on_arrival_checkbox' => ['string', 'max:1'],
                 'dead_on_operational_checkbox' => ['string', 'max:1'],
@@ -202,8 +207,12 @@ class ReturnRequests extends Controller
             // $materialPicturePath = $request->file('material_picture')->store('uploaded-files');
             
 
-            if ($request->hasFile('material_picture')) {
-                $data['material_picture'] = $request->file('material_picture')->store('uploaded-files', 'public');
+            if ($request->hasFile('material_picture_1')) {
+                $data['material_picture_1'] = $request->file('material_picture_1')->store('uploaded-files', 'public');
+            }
+
+            if ($request->hasFile('material_picture_2')) {
+                $data['material_picture_2'] = $request->file('material_picture_2')->store('uploaded-files', 'public');
             }
 
             ReturnRequest::where('return_request_id', $request->input('return_request_id'))

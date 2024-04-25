@@ -174,12 +174,19 @@ date_default_timezone_set('asia/jakarta');
 
                                     <div class="col-12 col-lg-6">
                                         <div class="mb-3">
-                                            <label for="material-picture-input">Foto Material</label>
-                                            <input class="form-control" id="material-picture-input" type="file" name="material_picture">
-                                            <small class="text-danger">{{ $errors->first('material_picture') }}</small>
+                                            <label for="material-picture-1-input">Foto Material 1</label>
+                                            <input class="form-control" id="material-picture-1-input" type="file" name="material_picture_1">
+                                            <small class="text-danger">{{ $errors->first('material_picture_1') }}</small>
                                         </div>
                                     </div>
 
+                                    <div class="col-12 col-lg-6">
+                                        <div class="mb-3">
+                                            <label for="material-picture-2-input">Foto Material 2</label>
+                                            <input class="form-control" id="material-picture-2-input" type="file" name="material_picture_2">
+                                            <small class="text-danger">{{ $errors->first('material_picture_2') }}</small>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="alert alert-info mb-3" role="alert">

@@ -421,8 +421,13 @@ date_default_timezone_set('asia/jakarta');
                         <div style="width: 50%; float: left;">
                         <div>Foto Material :</div>
 
-                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("storage/" . $returnRequest->material_picture))) }}" alt="" style="max-width: 100px; max-height: 100px;">
-                       
+                            @if ($returnRequest->material_picture_1)
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("storage/" . $returnRequest->material_picture_1))) }}" alt="" style="max-width: 100px; max-height: 100px;">
+                            @endif
+
+                            @if ($returnRequest->material_picture_2)
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("storage/" . $returnRequest->material_picture_2))) }}" alt="" style="max-width: 100px; max-height: 100px;">
+                            @endif
                        <br>
                             <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path("storage/" . $creator->signature))) }}" alt="" style="max-width: 100px; max-height: 100px;">
                             <div>{{ $creator->username }}</div>

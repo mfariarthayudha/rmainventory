@@ -176,13 +176,21 @@
 
                                     <div class="col-12 col-lg-6">
                                         <div class="mb-3">
-                                            <label for="material-picture-input">Foto Material</label>
-                                            <input class="form-control" id="material-picture-input" type="file" name="material_picture">
+                                            <label for="material-picture-1-input">Foto Material 1</label>
+                                            <input class="form-control" id="material-picture-1-input" type="file" name="material_picture_1">
                                             <small>*Abaikan bila tidak ingin diubah</small>
-                                            <small class="text-danger">{{ $errors->first('material_picture') }}</small>
+                                            <small class="text-danger">{{ $errors->first('material_picture_1') }}</small>
                                         </div>
                                     </div>
 
+                                    <div class="col-12 col-lg-6">
+                                        <div class="mb-3">
+                                            <label for="material-picture-2-input">Foto Material 2</label>
+                                            <input class="form-control" id="material-picture-2-input" type="file" name="material_picture_2">
+                                            <small>*Abaikan bila tidak ingin diubah</small>
+                                            <small class="text-danger">{{ $errors->first('material_picture_2') }}</small>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="alert alert-info mb-3" role="alert">

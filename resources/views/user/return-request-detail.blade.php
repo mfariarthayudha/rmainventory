@@ -173,10 +173,23 @@ var_dump($errors);
 
                                     <div class="col-12 col-lg-6">
                                         <div class="card">
-                                            <div class="card-header">Foto Material</div>
+                                            <div class="card-header">Foto Material 1</div>
                                             <div class="d-flex justify-content-center align-items-center">
-                                                @if ($returnRequest && $returnRequest->material_picture)
-                                                <img class="card-img-top mx-auto" src="{{ asset('storage/' . $returnRequest->material_picture) }}" style="max-width: 50%; padding: 50px;">
+                                                @if ($returnRequest && $returnRequest->material_picture_1)
+                                                <img class="card-img-top mx-auto" src="{{ asset('storage/' . $returnRequest->material_picture_1) }}" style="max-width: 50%; padding: 50px;">
+                                                @else
+                                                <p>No picture available</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-6">
+                                        <div class="card">
+                                            <div class="card-header">Foto Material 2</div>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                @if ($returnRequest && $returnRequest->material_picture_2)
+                                                <img class="card-img-top mx-auto" src="{{ asset('storage/' . $returnRequest->material_picture_2) }}" style="max-width: 50%; padding: 50px;">
                                                 @else
                                                 <p>No picture available</p>
                                                 @endif
