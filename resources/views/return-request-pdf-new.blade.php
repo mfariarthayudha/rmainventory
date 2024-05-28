@@ -19,12 +19,18 @@
             }
         }
 
+        .form-check {
+            min-height: 0rem;
+            padding-left: 0em;
+            margin-bottom: 0rem;
+        }
+
         body,
         td,
         th,
         p,
         label {
-            font-size: 8pt !important;
+            font-size: 7pt !important;
             margin: 0;
         }
 
@@ -52,8 +58,8 @@
                     <div class="col-12">
                         <div class="text-center">
                             <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ;"></i>
-                            <h4 class="pt-0"> Return Material Authorization
-                            </h4>
+                            <h5 class="pt-0"> Return Material Authorization
+                            </h5>
                             <h6 class="pt-0"> RMA
                             </h6>
                             <h6 class="pt-0"> (Untuk Dilampirkan Pada Setiap Pengembalian Material ke Gudang)
