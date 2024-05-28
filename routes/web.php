@@ -25,6 +25,7 @@ Route::middleware(['mustAuthenticated'])->group(function() {
         Route::get('/_reject', [ReturnRequests::class, '_reject']);
         Route::get('/_export-excel', [ReturnRequests::class, '_exportExcel']);
         Route::get('/_export-pdf', [ReturnRequests::class, '_exportPdf']);
+        Route::get('/exportPDF', [ReturnRequests::class, 'exportPDF']);
 
         Route::get('/create', [ReturnRequests::class, 'create']);
         Route::get('/edit', [ReturnRequests::class, 'edit']);

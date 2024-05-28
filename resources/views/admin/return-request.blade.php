@@ -142,35 +142,27 @@
 											<th>Customer</th>
 											<th>Status</th>
 											<th>Tanggal Pengembalian</th>
-                                            <th>action</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-											<th>No</th>
-                                            <th>No.IO/SP2k/SO/PO/ANDOP</th>
-                                            <th>SN</th>
-											<th>Customer</th>
-											<th>Status</th>
-											<th>Tanggal Pengembalian</th>
-                                            <th>action</th>
-                                        </tr>
-                                    </tfoot>
+                                    
                                     <tbody>
                                         @foreach ($returnRequests as $index => $returnRequest)
                                         <tr>
-                                            <th>{{ $index + 1 }}</th>
-                                            <th>{{ $returnRequest->identifier }}</th>
-                                            <th>{{ $returnRequest->serial_number }}</th>
-                                            <th>{{ $returnRequest->customer_name }}</th>
-                                            <th>{{ $returnRequest->request_status }}</th>
-                                            <th>{{ $returnRequest->created_at }}</th>
-                                            <th>
-                                                <a href="/return-requests/detail?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-primary">Detail</a>
-                                                <!-- <a href="{{ route('return-requests.export-pdf') }}" class="btn btn-warning">Export PDF</a> -->
-                                                <a href="{{ url('/return-requests/_export-pdf?returnRequestId=' . $returnRequest->return_request_id) }}" class="btn btn-warning">Export PDF</a>
-
-                                            </th>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $returnRequest->identifier }}</td>
+                                            <td>{{ $returnRequest->serial_number }}</td>
+                                            <td>{{ $returnRequest->customer_name }}</td>
+                                            <td>{{ $returnRequest->request_status }}</td>
+                                            <td>{{ $returnRequest->created_at }}</td>
+                                            <td style="display: flex; justify-content: center;">
+                                                <a href="/return-requests/detail?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-primary btn-xs mr-1"><i class="fas fa-info-circle"></i>  Detail</a>
+                                                <a href="{{ url('/return-requests/_export-pdf?returnRequestId=' . $returnRequest->return_request_id) }}" class="btn btn-warning btn-xs mr-1"><i class="fas fa-file-pdf"></i>  Export PDF</a>
+                                                <a href="{{ url('/return-requests/exportPDF?returnRequestId=' . $returnRequest->return_request_id) }}" class="btn btn-warning btn-xs" target="_blank"><i class="fas fa-file-pdf"></i>  Export PDF</a>
+                                            </td>
+                                            
+                                            
+                                            
                                         </tr>
                                         @endforeach
                                     </tbody>

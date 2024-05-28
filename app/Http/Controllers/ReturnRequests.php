@@ -14,7 +14,8 @@ use App\Models\User;
 
 class ReturnRequests extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $filter;
 
         if ($request->has('status')) {
@@ -59,7 +60,8 @@ class ReturnRequests extends Controller
         }
     }
 
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         if ($request->user()->role == 'user') {
             return view('user.return-request-form', [
                 'user' => $request->user()
@@ -67,7 +69,8 @@ class ReturnRequests extends Controller
         }
     }
 
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
         if ($request->user()->role == 'user') {
             return view('user.return-request-edit', [
                 'user' => $request->user(),
@@ -81,10 +84,10 @@ class ReturnRequests extends Controller
     {
         // $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))->first();
         // var_dump($returnRequest); 
-    
+
         if ($request->user()->role == 'admin') {
             $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
-            ->first();
+                ->first();
 
             return view('admin.return-request-detail', [
                 'user' => $request->user(),
@@ -94,7 +97,7 @@ class ReturnRequests extends Controller
             ]);
         } elseif ($request->user()->role == 'user') {
             $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
-            ->first();
+                ->first();
 
             return view('user.return-request-detail', [
                 'user' => $request->user(),
@@ -105,7 +108,8 @@ class ReturnRequests extends Controller
         }
     }
 
-    public function _create(Request $request) {
+    public function _create(Request $request)
+    {
         date_default_timezone_set('asia/jakarta');
 
         if ($request->user()->role == 'user') {
@@ -167,7 +171,8 @@ class ReturnRequests extends Controller
         }
     }
 
-    public function _edit(Request $request) {
+    public function _edit(Request $request)
+    {
         date_default_timezone_set('asia/jakarta');
 
         if ($request->user()->role == 'user') {
@@ -205,7 +210,7 @@ class ReturnRequests extends Controller
             // // $materialPicturePath = $request->file('material_picture')->store('uploaded-files', 'public');
 
             // $materialPicturePath = $request->file('material_picture')->store('uploaded-files');
-            
+
 
             if ($request->hasFile('material_picture_1')) {
                 $data['material_picture_1'] = $request->file('material_picture_1')->store('uploaded-files', 'public');
@@ -269,7 +274,8 @@ class ReturnRequests extends Controller
         return redirect('/return-requests');
     }
 
-    public function _reject(Request $request){
+    public function _reject(Request $request)
+    {
         date_default_timezone_set('Asia/Jakarta');
 
         $validator = Validator::make(
@@ -317,8 +323,9 @@ class ReturnRequests extends Controller
 
         return redirect('/return-requests');
     }
-    
-    public function _exportExcel(Request $request) {
+
+    public function _exportExcel(Request $request)
+    {
         if ($request->user()->role == 'admin') {
             return view('admin.return-request-excel', [
                 'user' => $request->user(),
@@ -328,7 +335,8 @@ class ReturnRequests extends Controller
         }
     }
 
-    public function _exportPdf(Request $request) {
+    public function _exportPdf(Request $request)
+    {
         if ($request->user()->role == 'admin') {
             $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
                 ->first();
@@ -359,7 +367,20 @@ class ReturnRequests extends Controller
             } else {
                 return $pdf->stream('return_request.pdf');
             }
-            
+        }
+    }
+
+
+    public function exportPDF(Request $request)
+    {
+        if ($request->user()->role == 'admin') {
+            $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))->first();
+            $creator = User::where('user_id', $returnRequest->created_by)->first();
+    
+            return view('return-request-pdf-new', [
+                'returnRequest' => $returnRequest,
+                'creator' => $creator
+            ]);
         }
     }
 }
