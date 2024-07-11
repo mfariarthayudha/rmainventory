@@ -176,22 +176,30 @@ var_dump($errors);
                                             <div class="card-header">Foto Material 1</div>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 @if ($returnRequest && $returnRequest->material_picture_1)
-                                                <img class="card-img-top mx-auto" src="{{ asset('storage/' . $returnRequest->material_picture_1) }}" style="max-width: 50%; padding: 50px;">
+                                                    <a href="#" data-toggle="modal" data-target="#imageModal1">
+                                                        <img class="card-img-top mx-auto"
+                                                            src="{{ asset('storage/' . $returnRequest->material_picture_1) }}"
+                                                            style="max-width: 50%; padding: 50px;">
+                                                    </a>
                                                 @else
-                                                <p>No picture available</p>
+                                                    <p>No picture available</p>
                                                 @endif
                                             </div>
                                         </div>
                                     </div>
-
+    
                                     <div class="col-12 col-lg-6">
                                         <div class="card">
                                             <div class="card-header">Foto Material 2</div>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 @if ($returnRequest && $returnRequest->material_picture_2)
-                                                <img class="card-img-top mx-auto" src="{{ asset('storage/' . $returnRequest->material_picture_2) }}" style="max-width: 50%; padding: 50px;">
+                                                    <a href="#" data-toggle="modal" data-target="#imageModal2">
+                                                        <img class="card-img-top mx-auto"
+                                                            src="{{ asset('storage/' . $returnRequest->material_picture_2) }}"
+                                                            style="max-width: 50%; padding: 50px;">
+                                                    </a>
                                                 @else
-                                                <p>No picture available</p>
+                                                    <p>No picture available</p>
                                                 @endif
                                             </div>
                                         </div>
@@ -391,6 +399,40 @@ var_dump($errors);
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="imageModal1" tabindex="-1" role="dialog" aria-labelledby="imageModal1Label"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModal1Label">Foto Material 1</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img src="{{ asset('storage/' . $returnRequest->material_picture_1) }}" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="modal fade" id="imageModal2" tabindex="-1" role="dialog" aria-labelledby="imageModal2Label"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModal2Label">Foto Material 2</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img src="{{ asset('storage/' . $returnRequest->material_picture_2) }}" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
             </main>
         </div>
     </div>

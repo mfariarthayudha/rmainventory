@@ -25,6 +25,11 @@
             margin-bottom: 0rem;
         }
 
+        .form-check-label {
+            color: red;
+        }
+
+
         body,
         td,
         th,
@@ -47,6 +52,22 @@
 
         .table {
             padding: 0 !important;
+        }
+
+        /* Change the checkbox color when checked */
+        .custom-checkbox:checked {
+            background-color: black;
+            border-color: black;
+        }
+
+        /* Optional: Change the color of the checkmark inside the checkbox */
+        .custom-checkbox:checked::before {
+            color: white;
+        }
+
+        /* Make the label bold when checkbox is checked */
+        .custom-checkbox:checked+.form-check-label {
+            font-weight: bold;
         }
     </style>
     <div class="card">
@@ -72,7 +93,7 @@
 
 
                     <div class="row  justify-content-center">
-                        <table class="table table-striped">
+                        <table class="table">
 
                             <tbody style="padding: 0;">
                                 <tr>
@@ -119,93 +140,91 @@
 
                         </table>
                     </div>
-                    <div class="row">
+                    <div class="row d-flex justify-content-start">
                         <div class="col-12">
-                            <p class="ms-3">Beri tanda Checker pada kotak jika Material rusak </p>
+                            <p class="ms-3 text-start">Beri tanda Checker pada kotak jika Material rusak </p>
 
                         </div>
-                        <div class="col-2">
 
-                        </div>
                         <div class="col-3">
                             <div class="form-check">
                                 <span>07.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->continue_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Continue</label>
                             </div>
 
                             <div class="form-check">
                                 <span>09.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->dead_on_arrival_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Dead on Arrival</label>
                             </div>
                             <div class="form-check">
                                 <span>10.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->dead_on_operational_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Dead on Operational</label>
                             </div>
                             <div class="form-check">
                                 <span>11.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox "
                                     @if ($returnRequest->ber_indicator_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">BER Indication</label>
                             </div>
                             <div class="form-check">
                                 <span>12.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->software_error_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Software Error</label>
                             </div>
                             <div class="form-check">
                                 <span>13.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->tributary_error_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Tributary Error</label>
                             </div>
                             <div class="form-check">
                                 <span>14.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->channel_error_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Channel Error</label>
                             </div>
                             <div class="form-check">
                                 <span>15.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->port_error_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Port Error</label>
                             </div>
 
                             <div class="form-check">
                                 <span>16.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->laser_tx_faulty_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">TX Laser Faulty</label>
                             </div>
 
                             <div class="form-check">
                                 <span>17.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->laser_rx_faulty_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">RX Laser Faulty</label>
                             </div>
 
                             <div class="form-check">
                                 <span>18.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->physical_damage_checkbox == 1) checked @endif>
                                 <label for="" class="form-check-label">Pyshical Damage</label>
                             </div>
 
                             <div class="form-check">
                                 <span>19.</span>
-                                <input type="checkbox" class="form-check-input"
+                                <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->misscellaneous) checked @endif>
                                 <label for="" class="form-check-label">Misscellaneous</label>
                                 <input type="text" id="" value="{{ $returnRequest->misscellaneous }}"
-                                    class="form-check-input">
+                                    class="form-check-input custom-checkbox">
                             </div>
                         </div>
                         <div class="col-7">
@@ -242,7 +261,7 @@
                                 <span>23.</span>
                                 <input type="checkbox" class="form-check-input"
                                     @if ($returnRequest->number_of_tribu > 1) checked @endif>
-                                <label for="" class="form-check-label">Number of Tribu :
+                                <label for="" class="form-check-label1">Number of Tribu :
                                     {{ $returnRequest->number_of_tribu }}</label>
                             </div>
 
@@ -250,7 +269,7 @@
                                 <span>24.</span>
                                 <input type="checkbox" class="form-check-input"
                                     @if ($returnRequest->number_of_char > 1) checked @endif>
-                                <label for="" class="form-check-label">Number of Char :
+                                <label for="" class="form-check-label1">Number of Char :
                                     {{ $returnRequest->number_of_char }}</label>
                             </div>
 
@@ -258,9 +277,12 @@
                                 <span>25.</span>
                                 <input type="checkbox" class="form-check-input"
                                     @if ($returnRequest->number_of_port > 1) checked @endif>
-                                <label for="" class="form-check-label">Number of Port :
+                                <label for="" class="form-check-label1">Number of Port :
                                     {{ $returnRequest->number_of_port }}</label>
                             </div>
+                        </div>
+                        <div class="col-2">
+
                         </div>
                     </div>
                     <hr>
@@ -288,6 +310,8 @@
                                 @endif
                             </div>
                         </div>
+
+
                         <div class="col-7">
                             <div class="notice">Note:</div>
                             <div class="notice">Continue : Indikasi eror terjadi permanent / terus menerus.</div>

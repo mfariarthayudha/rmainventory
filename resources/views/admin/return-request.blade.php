@@ -157,7 +157,7 @@
                                             <td>{{ $returnRequest->created_at }}</td>
                                             <td style="display: flex; justify-content: center;">
                                                 <a href="/return-requests/detail?returnRequestId={{ $returnRequest->return_request_id }}" class="btn btn-primary btn-xs mr-1"><i class="fas fa-info-circle"></i>  Detail</a>
-                                                <a href="{{ url('/return-requests/_export-pdf?returnRequestId=' . $returnRequest->return_request_id) }}" class="btn btn-warning btn-xs mr-1"><i class="fas fa-file-pdf"></i>  Export PDF</a>
+                                                {{-- <a href="{{ url('/return-requests/_export-pdf?returnRequestId=' . $returnRequest->return_request_id) }}" class="btn btn-warning btn-xs mr-1"><i class="fas fa-file-pdf"></i>  Export PDF</a> --}}
                                                 <a href="{{ url('/return-requests/exportPDF?returnRequestId=' . $returnRequest->return_request_id) }}" class="btn btn-warning btn-xs" target="_blank"><i class="fas fa-file-pdf"></i>  Export PDF</a>
                                             </td>
                                             
