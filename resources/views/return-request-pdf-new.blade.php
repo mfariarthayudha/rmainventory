@@ -79,7 +79,7 @@
                     <div class="col-12">
                         <div class="text-center">
                             <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ;"></i>
-                            <h5 class="pt-0"> Return Material Authorization
+                            <h5 class="pt-0"> Return Material Authorization @if ($returnRequest->nomor_gr) ({{ $returnRequest->nomor_gr }}) @endif
                             </h5>
                             <h6 class="pt-0"> RMA
                             </h6>
