@@ -12,20 +12,11 @@
             @page {
                 size: A4;
                 margin: 0;
-                padding: 0;
             }
 
             body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 80vh; 
-            transform: scale(1.2); /* Mengatur skala menjadi 120% */
-            transform-origin: center; /* Mengatur titik asal skala menjadi sudut kiri atas */
-       
-        }
+                margin: 0;
+            }
         }
 
         .form-check {
