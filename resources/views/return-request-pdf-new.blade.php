@@ -21,10 +21,10 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 80vh; 
+            height: 80vh;
             transform: scale(1.2); /* Mengatur skala menjadi 120% */
             transform-origin: center; /* Mengatur titik asal skala menjadi sudut kiri atas */
-       
+
         }
         }
 
@@ -60,6 +60,7 @@
         }
 
         .table {
+            border: 1px solid black;
             padding: 0 !important;
         }
 
@@ -79,11 +80,9 @@
             font-weight: bold;
         }
     </style>
-    <div class="card">
+    <div class="card" style="border: 0 !important;">
         <div class="card-body">
             <div class="container ">
-
-
                 <div class="container">
                     <div class="col-12">
                         <div class="text-center">
@@ -103,7 +102,6 @@
 
                     <div class="row  justify-content-center">
                         <table class="table">
-
                             <tbody style="padding: 0;">
                                 <tr>
                                     <td class="no">1</td>
@@ -146,7 +144,6 @@
                                     <td class="keterangan">: {{ $returnRequest->serial_number }}</td>
                                 </tr>
                             </tbody>
-
                         </table>
                     </div>
                     <div class="row d-flex justify-content-start">
@@ -266,35 +263,58 @@
                                 <label for="" class="form-check-label">Battery Faulty</label>
                             </div>
 
-                            <div class="form-check">
-                                <span>23.</span>
-                                <input type="checkbox" class="form-check-input"
-                                    @if ($returnRequest->number_of_tribu > 1) checked @endif>
-                                <label for="" class="form-check-label1">Number of Tribu :
-                                    {{ $returnRequest->number_of_tribu }}</label>
-                            </div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <span>23.</span>
+                                            <input type="checkbox" class="form-check-input"
+                                                   @if ($returnRequest->number_of_tribu > 1) checked @endif>
+                                            <label for="" class="form-check-label1">Number of Tribu :</label>
+                                        </div>
+                                    </td>
 
-                            <div class="form-check">
-                                <span>24.</span>
-                                <input type="checkbox" class="form-check-input"
-                                    @if ($returnRequest->number_of_char > 1) checked @endif>
-                                <label for="" class="form-check-label1">Number of Char :
-                                    {{ $returnRequest->number_of_char }}</label>
-                            </div>
+                                    <td style="border: 1px solid black; width: 50%;">
+                                        {{ $returnRequest->number_of_tribu }}
+                                    </td>
+                                </tr>
 
-                            <div class="form-check">
-                                <span>25.</span>
-                                <input type="checkbox" class="form-check-input"
-                                    @if ($returnRequest->number_of_port > 1) checked @endif>
-                                <label for="" class="form-check-label1">Number of Port :
-                                    {{ $returnRequest->number_of_port }}</label>
-                            </div>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <span>24.</span>
+                                            <input type="checkbox" class="form-check-input"
+                                                   @if ($returnRequest->number_of_char > 1) checked @endif>
+                                            <label for="" class="form-check-label1">Number of Char :</label>
+                                        </div>
+                                    </td>
+
+                                    <td style="border: 1px solid black; width: 50%;">
+                                        {{ $returnRequest->number_of_char }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <span>25.</span>
+                                            <input type="checkbox" class="form-check-input"
+                                                   @if ($returnRequest->number_of_port > 1) checked @endif>
+                                            <label for="" class="form-check-label1">Number of Port :</label>
+                                        </div>
+                                    </td>
+
+                                    <td style="border: 1px solid black; width: 50%;">
+                                        {{ $returnRequest->number_of_port }}
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="col-2">
 
                         </div>
                     </div>
-                    <hr>
+
                     <div class="row">
                         <div class="col-1">
 
@@ -351,7 +371,8 @@
                         <div class="col-2">
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-4 mt-5">
+                            <div>Engineer Sign</div>
                             <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('storage/' . $creator->signature))) }}"
                                 alt="" style="max-width: 100px; max-height: 100px;">
                             <div>{{ $creator->username }}</div>
