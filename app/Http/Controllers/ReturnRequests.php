@@ -83,7 +83,7 @@ class ReturnRequests extends Controller
     public function detail(Request $request)
     {
         // $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))->first();
-        // var_dump($returnRequest); 
+        // var_dump($returnRequest);
 
         if ($request->user()->role == 'admin') {
             $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))
@@ -360,6 +360,7 @@ class ReturnRequests extends Controller
 
             // Render the PDF
             $pdf->render();
+            dd($returnRequest);
 
             // Download the generated PDF file
             if ($returnRequest->nomor_gr != null) {
@@ -376,7 +377,7 @@ class ReturnRequests extends Controller
         if ($request->user()->role == 'admin') {
             $returnRequest = ReturnRequest::where('return_request_id', $request->query('returnRequestId'))->first();
             $creator = User::where('user_id', $returnRequest->created_by)->first();
-    
+
             return view('return-request-pdf-new', [
                 'returnRequest' => $returnRequest,
                 'creator' => $creator

@@ -87,9 +87,7 @@
                     <div class="col-12">
                         <div class="text-center">
                             <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ;"></i>
-                            <h5 class="pt-0"> Return Material Authorization @if ($returnRequest->nomor_gr) ({{ $returnRequest->nomor_gr }}) @endif
-                            </h5>
-                            <h6 class="pt-0"> RMA
+                            <h6 class="mt-5"> RMA @if ($returnRequest->nomor_gr) ({{ $returnRequest->nomor_gr }}) @endif
                             </h6>
                             <h6 class="pt-0"> (Untuk Dilampirkan Pada Setiap Pengembalian Material ke Gudang)
 
@@ -148,8 +146,8 @@
                     </div>
                     <div class="row d-flex justify-content-start">
                         <div class="col-12">
-                            <p class="ms-3 text-start">Beri tanda Checker pada kotak jika Material rusak </p>
-
+                            <span class="ms-3 text-start">Beri tanda Checker pada kotak jika Material rusak </span>
+                            <input type="checkbox" class="form-check-input custom-checkbox" checked>
                         </div>
 
                         <div class="col-3">
@@ -229,8 +227,9 @@
                                 <input type="checkbox" class="form-check-input custom-checkbox"
                                     @if ($returnRequest->misscellaneous) checked @endif>
                                 <label for="" class="form-check-label">Misscellaneous</label>
-                                <input type="text" id="" value="{{ $returnRequest->misscellaneous }}"
-                                    class="form-check-input custom-checkbox">
+                                <td style="border: 1px solid black; width: 50%;">
+                                    {{ $returnRequest->misscellaneous }}
+                                </td>
                             </div>
                         </div>
                         <div class="col-7">
@@ -315,6 +314,16 @@
                         </div>
                     </div>
 
+                    <div class="form-check">
+                        <span>19.</span>
+                        <input type="checkbox" class="form-check-input custom-checkbox"
+                               @if ($returnRequest->misscellaneous) checked @endif>
+                        <label for="" class="form-check-label">Misscellaneous : </label>
+                        <span class="border border-dark d-inline-block" style="width: 100px">
+                            .{{ $returnRequest->misscellaneous }}
+                        </span>
+                    </div>
+
                     <div class="row">
                         <div class="col-1">
 
@@ -368,14 +377,25 @@
                     </div>
                     <div class="row">
 
-                        <div class="col-2">
-                        </div>
-
                         <div class="col-4 mt-5">
                             <div>Engineer Sign</div>
                             <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('storage/' . $creator->signature))) }}"
                                 alt="" style="max-width: 100px; max-height: 100px;">
                             <div>{{ $creator->username }}</div>
+                        </div>
+
+                        <div class="col-2">
+                        </div>
+
+                        <div class="col-4 mt-5 d-flex flex-column justify-content-between">
+                            <div>Manager on duty / supervisor sign</div>
+
+                            <p>Name : </p>
+                        </div>
+
+                        <div class="col-2">
+                            <p>Master : Inventory<br>
+                            Copy : Technical Adm</p>
                         </div>
                     </div>
 
